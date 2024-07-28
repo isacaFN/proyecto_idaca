@@ -1,0 +1,202 @@
+:root{
+    --primario: #E20B0B; 
+    --fuente-prin: 4rem;
+    --negro: #000000; 
+    --blanco: #ffffff; 
+    --gris: #B9B3B3;
+    --encabezado: #F94343;
+}
+
+html{
+    font-size: 62.5%; /* para que 1 rem sea igual a 10px */
+    box-sizing: border-box;
+}
+
+*, *:before, *:after{
+    box-sizing: inherit;
+}
+
+body{
+    font-family: "Reddit Mono", monospace;
+    font-size: 16px;
+}
+h2{
+    color: var(--blanco);
+}
+
+span{
+    color: var(--negro);
+}
+
+main{
+    padding-top: 2rem;
+}
+
+.tabla th, td{
+    width: 80rem;
+    text-align: center;
+    border: var(--negro) 2px solid; 
+
+}
+
+th{
+    font-size: 2rem;
+    text-transform: uppercase;
+    background-color: var(--encabezado);
+
+}
+
+.titulo{
+    color: var(--negro);
+    text-align: center;
+    font-size: var(--fuente-prin);
+}
+
+.contenedor {
+    max-width: 120rem;
+    margin: 0 auto;
+}
+
+.fondo-nav{
+    background-color: var(--primario);
+    border-radius: 2rem;
+}
+
+.navegacion{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .navegacion{
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+.navegacion a{
+    color: var(--blanco);
+    text-decoration: none; 
+    padding: 1rem;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.navegacion a:hover{
+    color: #212121;
+}
+
+.footer{
+    text-align: center;
+}
+
+.sombra{
+    -webkit-box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.7);
+    -moz-box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.7);
+    box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.7);
+}
+
+.formulario{
+    background-color: var(--primario);
+    width: min(60rem, 100%); /* toma el valor mas pequeño para el tamaño inicial es de 600 px o 60 rem */
+    margin: 0 auto;
+    padding: 3rem;
+    border-radius: 3rem;
+
+}
+
+.formulario legend{
+    text-align: center;
+    font-size: 1.8rem; /* tamano de la letra un poco mas grande */ 
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--negro);
+}
+
+.formulario fieldset{
+    border: none;
+}
+.campo{
+    margin-bottom: 2rem;
+    
+}
+.input-estilo{
+    width: 100%;
+    border: none;
+    padding: 1rem;
+    border-radius: .5rem;
+}
+
+.campo label{
+    color: var(--blanco);
+    font-weight: bold;
+    margin-bottom: .5rem;
+    display: block;
+}
+
+.boton{
+    background-color: var(--negro);
+    color: var(--blanco);
+    padding: 1rem 3rem;
+    margin-top: 1rem;
+    text-decoration: none;
+    font-size: 2rem;
+    text-transform: uppercase;
+    font-weight: bold;  
+    border-radius: .5rem;
+    width: 90%; /** tamaño del boton **/ 
+    text-align: center;
+    border: none;
+}
+
+.with100{
+    width: 100%;
+}
+
+@media (min-width: 760px) {     
+    .boton{
+        width: auto;
+    }
+    
+}
+.flex{
+    display: flex;
+}
+
+.alinear-derecha{
+    justify-content: flex-end;
+}
+
+.boton:hover{
+    cursor: pointer;
+}
+.window-notice {
+    background: rgba(33, 41, 52, .90);
+    left: 0;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    display: flex;
+    position: fixed; /* si hace scroll la pantalla se mantiene fija */
+    z-index: 999; /* para que la venta se mantenga por encima de cualquier otra */
+}
+
+.window-notice .content {
+    background-color: var(--primario);
+    color: var(--blanco);
+    box-shadow: 0 1px 3px rgba(33, 41, 52, .75);
+    box-sizing: content-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    max-width: 500px;
+    min-width: 320px !important;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    font-size: 2rem;
+    padding: 2rem;
+}

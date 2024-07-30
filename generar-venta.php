@@ -1,34 +1,9 @@
 <?php
+    require_once("templates/navegacion.html");
+    require_once 'conexion.php';
     session_start();
 
 ?>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Embutidos IDACA</title>
-
-    <link rel="stylesheet" href="css/normalize.css">
-
-    <link rel="preload" href="css/style.css" as="style">
-    <link href="css/style.css" rel="stylesheet"> 
-
-</head>
-<body>
-        <header class="titulo">
-            <h1>Embutidos IDACA</h1>
-        </header>
-
-    <div class="fondo-nav">
-        <nav class="navegacion contenedor">
-            <a href="buscar-cliente.php">Generar venta</a>
-            <a href="ventas.php">Ver ventas</a>
-            <a href="clientes.php">Clientes</a>
-            <a href="crear.php">Crear Cliente</a>
-        </nav>
-    </div>
 
     <?php
         if (isset($_GET['alert'])) {?>
@@ -51,6 +26,7 @@
                     <?php 
                     
                         echo $_SESSION['nombre'];
+
                     ?>
                     </span>
                     </h2>
@@ -60,49 +36,31 @@
                     <div class="contenedor-campos">
                         <div class="campo">
                             <label for="codpro">producto </label>
-                            <select name="codpro">
-                                    <option  value="chuleta">chuleta</option>
-                                    <option  value="chorizo">chorizo ahumado</option>
-                                    <option value="tocineta">tocineta ahumada</option>
+                            <select name="codpro"><?php
+                            $query_select = "SELECT nomprod FROM producto";
+                            $resultado = $conn->query($query_select);
+                            if($resultado->num_rows > 0){
+                                while ($fila = $resultado->fetch_array(MYSQLI_ASSOC)) {
+                                    ?> <option id=<?php $fila['nomprod'];?>><?php echo $fila['nomprod'];?></option><?php
+                                }
+                            }
+                            else{
+                                echo "no resulto";
+                            }
+                            ?>
                             </select>
 
                                 <label for="cant">cantidad kg</label>
                                 <input name="cant" class="input-estilo"  type="tel" placeholder="cantidad">
 
                         </div>
-                    
-                        <!-- <div class="campo">
-                            <label for="codpro1">producto </label>
-                            <select name="codpro1">
-                                    <option value="chuleta">chuleta</option>
-                                    <option value="chorizo">chorizo ahumado</option>
-                                    <option value="tocineta">tocineta ahumada</option>
-                            </select>
-
-                                <label for="cant1">cantidad kg</label>
-                                <input name="cant1" class="input-estilo"  type="tel" placeholder="cantidad">
-
-                        </div>
-
-                        <div class="campo">
-                            <label for="codpro2">producto </label>
-                            <select name="codpro2">
-                                    <option value="chuleta">chuleta</option>
-                                    <option value="chorizo">chorizo ahumado</option>
-                                    <option value="tocineta">tocineta ahumada</option>
-                            </select>
-
-                                <label for="cant2">cantidad kg</label>
-                                <input name="cant2" class="input-estilo"  type="tel" placeholder="cantidad">
-
-                        </div> -->
 
                         <div class="campo">
                             <label for="tven">tipo de venta</label>
                             <select name="tven">
-                                    <option value="efec">efectivo</option>
-                                    <option value="trans">transferencia</option>
-                                    <option value="cred">credito</option>
+                                    <option value="1">efectivo</option>
+                                    <option value="2">transferencia</option>
+                                    <option value="3">credito</option>
                             </select>
                         </div>
 

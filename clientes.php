@@ -1,34 +1,7 @@
 <?php   
+    require_once("templates/navegacion.html");
     require_once("conexion.php");
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Embutidos Idaca</title>
-
-    <link rel="stylesheet" href="css/normalize.css">
-
-    <link rel="preload" href="css/style.css" as="style">
-    <link href="css/style.css" rel="stylesheet"> 
-
-</head>
-<body>
-
-    <header class="titulo">
-                <h1>Embutidos IDACA</h1>
-    </header>
-
-            <div class="fondo-nav">
-                <nav class="navegacion contenedor">
-                    <a href="buscar-cliente.php">Generar venta</a>
-                    <a href="ventas.php">Ver ventas</a>
-                    <a href="clientes.php">Clientes</a>
-                    <a href="crear.php">Crear Cliente</a>
-                </nav>
-            </div>
 
         <main>
                 <table class="tabla">

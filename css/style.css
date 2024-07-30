@@ -200,3 +200,7 @@ th{
     font-size: 2rem;
     padding: 2rem;
 }
+
+.stock{
+    display: flex;
+}

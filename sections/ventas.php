@@ -1,6 +1,6 @@
 <?php   
-        require_once("templates/navegacion.html");
-    	require_once("conexion.php");
+        require_once 'navegacion.html'; 
+    	require_once("../functions/conexion.php");
 ?>
 
         <main>

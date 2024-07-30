@@ -1,5 +1,5 @@
 <?php
-        require_once("templates/navegacion.html");
+        require_once 'navegacion.html'; 
         if (isset($_GET['alert'])) {?>
             <div class="window-notice">
                 <div class="content">
@@ -14,7 +14,7 @@
     
         <section>
             <br><br><br>
-            <form class="formulario sombra" action="crear-cliente.php" method="post">
+            <form class="formulario sombra" action="../functions/crear-cliente.php" method="post">
                 <fieldset>
                     <legend>llena todos los campos para crear el cliente</legend>
                     <div class="contenedor-campos">

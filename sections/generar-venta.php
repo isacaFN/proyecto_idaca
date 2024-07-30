@@ -1,6 +1,6 @@
 <?php
-    require_once("templates/navegacion.html");
-    require_once 'conexion.php';
+    require_once 'navegacion.html'; 
+    require_once '../functions/conexion.php';
     session_start();
 
 ?>
@@ -18,7 +18,7 @@
 
     <main>
     <br><br><br>
-    <form class="formulario" action="ingresar-venta.php" method="post">
+    <form class="formulario" action="../functions/ingresar-venta.php" method="post">
                 <fieldset>
                     <legend>Rellena los campos para generar la venta</legend>
 

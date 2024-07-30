@@ -1,6 +1,6 @@
        <div>
             <?php
-                require_once("templates/navegacion.html");
+               require_once 'navegacion.html'; 
                 if (isset($_GET['alert'])) {
                     echo 'El usuario no existe';
                 }
@@ -12,7 +12,7 @@
 
         <section>
         <br><br><br>
-            <form class="formulario sombra" action="buscar.php" method="post">
+            <form class="formulario sombra" action="../functions/buscar.php" method="post">
                 <fieldset>
                     <legend>Buscar cliente</legend>
                     <div class="contenedor-campos">

@@ -17,7 +17,7 @@
         header('location: generar-venta.php');
     }
     else{
-        header('location: buscar-cliente.php?alert=2');
+        header('location: ../sections/buscar-cliente.php?alert=2');
     }
     $conn->close();
 

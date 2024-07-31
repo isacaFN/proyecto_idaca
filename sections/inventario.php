@@ -18,13 +18,16 @@ require_once("../functions/conexion.php");
             </tr>
 
             <tr>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
             </tr>
         </table>
     </div>
-
-    <div>
-        <form class="formulario sombra" action="../functions/addstock.php" method="post" >
-            <h2>Agregar Stock</h2>
+    </section>
+    <div class="stock2">
+        <form class="formstock" action="../functions/addstock.php" method="post" >
+            <span>agregar Stock</span>
             <label for="codpro">Elige un producto</label>
             <select name="codpro">
             <?php
@@ -34,11 +37,9 @@ require_once("../functions/conexion.php");
                 ?>
             </select> 
 
-            <input name="cant" class="input-estilo"  type="tel" placeholder="cantidad">
+            <input name="cant" type="tel" placeholder="cantidad">
 
-            <input class="boton with100" type="submit" value="agregar">
+            <input type="submit" value="agregar">
 
         </form>
     </div>
-
-</section>

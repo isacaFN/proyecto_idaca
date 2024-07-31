@@ -14,7 +14,7 @@
         $fila = mysqli_fetch_array( $resultado );
         $_SESSION['nombre'] = $fila['nombre'];
 
-        header('location: generar-venta.php');
+        header('location: ../sections/generar-venta.php');
     }
     else{
         header('location: ../sections/buscar-cliente.php?alert=2');

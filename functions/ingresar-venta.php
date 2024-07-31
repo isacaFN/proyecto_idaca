@@ -31,7 +31,7 @@ $resultado = $conn->query($query_select);
     $resultado = $conn->query($query_insert);
 
     if($resultado > 0) {
-        header('location: generar-venta.php?alert=2');
+        header('location: ../sections/generar-venta.php?alert=2');
     }else{
     }
 

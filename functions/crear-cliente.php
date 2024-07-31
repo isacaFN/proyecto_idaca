@@ -16,7 +16,7 @@
 	$resultado = $conn->query($query_insert);
 
     if($resultado > 0) {
-        header('location: crear.php?alert=2');
+        header('location: ../sections/crear.php?alert=2');
     }
     $conn->close();
 ?>

@@ -14,7 +14,7 @@ $resultado = $conn->query($query_select);
            echo 'error al generar venta';
        }
 
-$query_insert = "INSERT INTO stock (idproducto, , nombre, cantactual ) VALUES ('$codp', '$producto', '$$cantidad ')";
+$query_insert = "INSERT INTO stock (idproducto, nombre, cantactual ) VALUES ('$codp', '$producto', '$cantidad')";
 
 $resultado = $conn->query($query_insert);
 

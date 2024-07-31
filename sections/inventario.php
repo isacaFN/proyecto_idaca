@@ -8,19 +8,16 @@ require_once("../functions/conexion.php");
     <div> 
         <table class="tabla">
         <?php 
-            $sql = "SELECT nomprod from producto";
-            $resul = mysqli_query($conn, $sql);
+            $query_select = "SELECT nomprod FROM producto";
+            $resultado = $conn->query($query_select);
             ?><tr><?php
-            if(mysqli_num_rows($resul) > 0) {
-            while($fila = mysqli_fetch_assoc($resul)){?> 
+            if($resultado->num_rows > 0) {
+            while($fila = $resultado->fetch_array(MYSQLI_ASSOC)){?> 
                 <th><?php echo $fila["nomprod"];?></th>
-                <?php }}?>
+                <?php $nombreProducto[] = $fila["nomprod"];}} $conn->close()?>
             </tr>
 
             <tr>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
             </tr>
         </table>
     </div>
@@ -31,15 +28,15 @@ require_once("../functions/conexion.php");
             <label for="codpro">Elige un producto</label>
             <select name="codpro">
             <?php
-            while($fila = mysqli_fetch_assoc($resul)){?> 
-                <option id="<?php $fila["nomprod"];?>"><?php echo $fila["nomprod"];?></option>
-            <?php } $conn->close();?>
-            </select>
+                for($i = 0; $i < count($nombreProducto); $i++){
+                    ?> <option id=<?php $nombreProducto[$i];?>><?php echo $nombreProducto[$i];?></option><?php
+                 }
+                ?>
+            </select> 
 
-            <label for="cant">cantidad en kg</label>
             <input name="cant" class="input-estilo"  type="tel" placeholder="cantidad">
 
-            <input class="boton with100" type="submit" value="Buscar">
+            <input class="boton with100" type="submit" value="agregar">
 
         </form>
     </div>

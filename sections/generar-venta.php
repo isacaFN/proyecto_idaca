@@ -1,8 +1,9 @@
 <?php
     require_once 'navegacion.html'; 
-    require_once '../functions/conexion.php';
     session_start();
+    require_once("../functions/functions.php");
 
+    $nomPro = nombreProducto();
 ?>
 
     <?php
@@ -37,16 +38,9 @@
                         <div class="campo">
                             <label for="codpro">producto </label>
                             <select name="codpro"><?php
-                            $query_select = "SELECT nomprod FROM producto";
-                            $resultado = $conn->query($query_select);
-                            if($resultado->num_rows > 0){
-                                while ($fila = $resultado->fetch_array(MYSQLI_ASSOC)) {
-                                    ?> <option id=<?php $fila['nomprod'];?>><?php echo $fila['nomprod'];?></option><?php
+                                for($i = 0; $i < count($nomPro); $i++){ ?>
+                                     <option id=<?php $nomPro[$i];?>><?php echo $nomPro[$i];?></option><?php
                                 }
-                            }
-                            else{
-                                echo "no resulto";
-                            }
                             ?>
                             </select>
 

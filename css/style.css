@@ -17,8 +17,8 @@ html{
 }
 
 body{
-    font-family: "Reddit Mono", monospace;
-    font-size: 16px;
+    font-family: "Varela Round", sans-serif;
+    font-style: normal;
 }
 h2{
     color: var(--blanco);

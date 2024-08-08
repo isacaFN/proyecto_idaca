@@ -1,4 +1,5 @@
 <?php
+    require_once 'head.html'; 
     require_once 'navegacion.html'; 
     session_start();
     require_once("../functions/functions.php");

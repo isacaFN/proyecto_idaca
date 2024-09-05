@@ -1,0 +1,19 @@
+{
+    "name": "isaac/proyecto_idaca",
+    "description": "ERP php MVC",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "MVC\\": "./",
+            "controllers\\": "./controllers",
+            "Model\\": "./models"
+        }
+    },
+    "authors": [
+        {
+            "name": "isaac caceres",
+            "email": "isaac.caceres.169@gmail.com"
+        }
+    ],
+    "require": {}
+}

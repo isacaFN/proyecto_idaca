@@ -28,7 +28,6 @@ class router
         $method = $_SERVER['REQUEST_METHOD'];
 
 
-        debugear($currentUrl);
         if ($method === 'GET') {
             $fn = $this->getRoutes[$currentUrl] ?? null;
 
@@ -57,7 +56,11 @@ class router
 
         // entonces incluimos la vista en el layout
         include_once __DIR__ . "/views/$view.php";
-        $contenido = ob_get_clean(); // Limpia el Buffer
-        include_once __DIR__ . '/views/layout.php';
+
+        if($view === 'auth/login'){
+        }else{
+            $contenido = ob_get_clean(); // Limpia el Buffer
+            include_once __DIR__ . '/views/layout.php';
+        }
     }
 }

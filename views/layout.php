@@ -21,7 +21,7 @@
                   </a>
                 </div>
                 <div class="links">
-                  <a href="index.php/logout">Cerrar Sesión</a>
+                  <a href="/login">iniciar sesion</a>
                   <a href="buscar-cliente.php">Generar venta</a>
                   <a href="ventas.php">Ver ventas</a>
                   <a href="clientes.php">Clientes</a>

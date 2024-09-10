@@ -2,10 +2,10 @@
 
 namespace controllers;
 
-use MVC\Router;
+use MVC\router;
 
 class LoginController{
-    public static function login(Router $router){
+    public static function login(router $router){
         $router->render('auth/login');
         
     }

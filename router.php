@@ -2,7 +2,7 @@
 
 namespace MVC;
 
-class Router
+class router
 {
     public array $getRoutes = [];
     public array $postRoutes = [];
@@ -23,22 +23,22 @@ class Router
         // Proteger Rutas...
         session_start();
 
-        // Arreglo de rutas protegidas...
-        // $rutas_protegidas = ['/admin', '/propiedades/crear', '/propiedades/actualizar', '/propiedades/eliminar', '/vendedores/crear', '/vendedores/actualizar', '/vendedores/eliminar'];
-
-        // $auth = $_SESSION['login'] ?? null;
-
-        $currentUrl = $_SERVER['PATH_INFO'] ?? '/';
+        // $currentUrl = $_SERVER['PATH_INFO'] ?? '/';
+        $currentUrl = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/') ?? '/';
         $method = $_SERVER['REQUEST_METHOD'];
 
+
+        debugear($currentUrl);
         if ($method === 'GET') {
             $fn = $this->getRoutes[$currentUrl] ?? null;
+
         } else {
             $fn = $this->postRoutes[$currentUrl] ?? null;
         }
 
 
         if ( $fn ) {
+            
             // Call user fn va a llamar una función cuando no sabemos cual sera
             call_user_func($fn, $this); // This es para pasar argumentos
         } else {
@@ -58,6 +58,6 @@ class Router
         // entonces incluimos la vista en el layout
         include_once __DIR__ . "/views/$view.php";
         $contenido = ob_get_clean(); // Limpia el Buffer
-         include_once __DIR__ . '/views/layout.php';
+        include_once __DIR__ . '/views/layout.php';
     }
 }

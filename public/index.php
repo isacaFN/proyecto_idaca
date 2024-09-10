@@ -1,14 +1,14 @@
 <?php
     require_once '../includes/app.php';
 
-use controllers\LoginController;
-use MVC\router;
+    use controllers\LoginController;
+    use MVC\router;
 
     $router = new router();
 
-    $router->get('/', [LoginController::class, 'login']);
-    $router->post('/', [LoginController::class, 'login']);
-    $router->get('/logout', [LoginController::class, 'logout']);
+    $router->get('proyecto_idaca/public', [LoginController::class, 'login']);
+    $router->post('proyecto_idaca/public', [LoginController::class, 'login']);
+    $router->get('proyecto_idaca/public/logout', [LoginController::class, 'logout']);
 
     //recuperar password
     $router->get('/olvidepw', [LoginController::class, 'olvidepw']);
@@ -19,8 +19,6 @@ use MVC\router;
     //crear usuario
     $router->get('/crear', [LoginController::class, 'crear']);
     $router->post('/crear', [LoginController::class, 'crear']);
-
-
 
     // Comprobar rutas
     $router->comprobarRutas();

@@ -14,11 +14,17 @@
   </head>
 
 <body>
-    <main>
+    <main>  
         <form class="formulario-login" action="/login" method="post">
-                <input type="text" name="username" placeholder="Usuario" required>
-                <input type="password" name="password" placeholder="Contraseña" required>
-                <input type="submit" value="Ingresar">
+            <div class="contenedor-formulario">
+                <div class="imagen-login">
+                    <img src="build/img/idacasvgb.svg" alt="logo">
+                 </div>
+                 
+                    <input type="text" name="username" placeholder="Usuario" required>
+                    <input type="password" name="password" placeholder="Contraseña" required>
+                    <input type="submit" value="Ingresar">
+            </div>
         </form>
     </main>
 </body>

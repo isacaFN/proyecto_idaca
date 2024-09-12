@@ -33,6 +33,10 @@
     gap: $gap;
 }
 
+@mixin flex{
+    display: flex;
+}
+
 @mixin resetear-lista {
     margin: 0;
     padding: 0;

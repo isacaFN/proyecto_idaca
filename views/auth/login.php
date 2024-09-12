@@ -20,10 +20,20 @@
                 <div class="imagen-login">
                     <img src="build/img/idacasvgb.svg" alt="logo">
                  </div>
-                 
-                    <input type="text" name="username" placeholder="Usuario" required>
+                 <h3>¡Hola!</h3>
+                 <span>Inicia sesión en tu cuenta para ingresar al sistema</span>
+
+                 <div class="contenedor-formulario-input">
+                    <input type="text" name="username" placeholder="Correo electronico" required>
+
                     <input type="password" name="password" placeholder="Contraseña" required>
-                    <input type="submit" value="Ingresar">
+
+                    <div class="contenedor-boton">
+                        <input class="boton" type="submit" value="Ingresar"">
+                    </div>
+
+                    <a href="#">¿Olvidaste tu contraseña?</a> 
+                 </div>
             </div>
         </form>
     </main>

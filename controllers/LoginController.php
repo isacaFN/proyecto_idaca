@@ -14,8 +14,10 @@ class LoginController{
         echo 'desde logout';
     }
 
-    public static function olvidepw(){
-        echo 'desde olvide la contreaseña';
+    public static function olvidepw(router $router){
+        $router->render('auth/olvidepw', [
+
+        ]);
     }
 
     public static function recuperar(){

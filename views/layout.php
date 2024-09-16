@@ -9,15 +9,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Varela+Round&display=swap" rel="stylesheet">
   
-    <link rel="preload" href="build/css/app.css" as="style">
-    <link href="build/css/app.css" rel="stylesheet"> 
+    <link rel="preload" href="../public/build/css/app.css" as="style">
+    <link href="../public/build/css/app.css" rel="stylesheet"> 
   </head>
   <body>
+    <?php if(!$login){ ?>
         <div class="header">
             <nav class="contenido-header">
                 <div>
                   <a href="menup.php">
-                    <img src="build/img/logoidaca.jpg">
+                    <img src="../public/build/img/logoidaca.jpg">
                   </a>
                 </div>
                 <div class="links">
@@ -30,8 +31,8 @@
                 </div>
             </nav>
         </div>
+    <?php } 
 
-    <?php echo $contenido; ?>
+    echo $contenido; ?>
             
-</body>
 </html>

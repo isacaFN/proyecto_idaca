@@ -57,10 +57,14 @@ class router
         // entonces incluimos la vista en el layout
         include_once __DIR__ . "/views/$view.php";
 
-        if($view === 'auth/login'){
+        if($view === 'auth/login' || $view === 'auth/olvidepw'){
+            $login = true;
         }else{
-            $contenido = ob_get_clean(); // Limpia el Buffer
-            include_once __DIR__ . '/views/layout.php';
+            $login = false;
         }
+
+        $contenido = ob_get_clean(); // Limpia el Buffer
+        include_once __DIR__ . '/views/layout.php';
+
     }
 }

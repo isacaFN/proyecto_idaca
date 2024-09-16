@@ -20,6 +20,10 @@ class LoginController{
         ]);
     }
 
+    public static function home(router $router){
+        $router->render('auth/home');
+    }
+
     public static function recuperar(){
         echo 'desde recuperar';
     }

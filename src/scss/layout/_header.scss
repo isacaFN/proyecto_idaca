@@ -1,43 +1,57 @@
 @use 'base/variables' as v;
 @use 'base/mixins' as m;
 
-.header {
-    border-bottom: v.$rojo .1px solid; 
-    .contenido-header {    
+.body-home{
+    height: 100%;
+}
+.contenedor-header{
+    width: 100%;
+    background-color: v.$blanco;
+    height: 5rem;
+}
+.contenido-header {    
         display: flex;
-        flex-direction: column;
-        align-items: center;
         padding: 1rem 0;
 
         @include m.tablet {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
             flex-direction: row;
         }
 
-        img{
-            height: 7rem;
-            width: 11rem;
-            margin: 0 8rem;
+        div{
+            margin: 0 2rem;
         }
-        a {
-            color: v.$negro;
-            font-size: 1.6rem;
-            font-weight: 600;
-    
-            &:hover,
-            &.active {
-                color: v.$rojo;
-            }
+
+        div:last-child{
+            margin: 0 1rem;
         }
-    }
 }
 
-.links{
+.contenedor-main{
+    height: calc(100vh - 5rem);
+    display: grid;
+    grid-template-columns: 1fr 7fr;
+    grid-template-rows: 1fr;
+}
+
+.barra-lateral{
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    background-color: v.$grisOscuro;
+    overflow-y: auto;
+
     a{
-        padding: 0 8rem;
+        color: v.$blanco;
+        margin-left: 1rem;
+        padding: .5rem 0;
     }
-    
+
 }
 
+.link-lateral{
+    display: flex;
+    align-items: center;
+}

@@ -1,13 +1,17 @@
+<body class="body-olvidepw">
 <main class="contenedor-olvidepw">
-    <div>
+    <div class="imagen-olvidepw">
         <img src="../public/build/img/logoidaca.jpg">
     </div>
-    <div>
-        <h1>Olvide mi contraseña</h1>
-        <p>Ingresa tu correo electronico para recibir instrucciones</p>
+    <div class="formulario-olvidepw">
+        <h2>Introduzca su correo</h2>
+        <p>Por favor Ingresa tu correo electronico para recibir instrucciones</p>
         <form class="olvidepw" action="/olvidepw" method="post">
-            <input type="email" name="email" placeholder="Correo electronico">
-            <input type="submit" value="Enviar">
+            <input type="email" name="email" required>
+            <input class="boton" type="submit" value="Enviar">
+
         </form>
+
+        <a href="login">Iniciar sesión</a>
     </div>
 </main>

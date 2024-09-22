@@ -16,7 +16,6 @@ class LoginController{
 
     public static function olvidepw(router $router){
         $router->render('auth/olvidepw', [
-
         ]);
     }
 

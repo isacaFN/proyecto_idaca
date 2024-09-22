@@ -12,8 +12,8 @@
     <link rel="preload" href="../public/build/css/app.css" as="style">
     <link href="../public/build/css/app.css" rel="stylesheet"> 
   </head>
+  <?php if(!$login){ ?>
   <body class="body-home">
-    <?php if(!$login){ ?>
         <div class="contenedor-header">
             <nav class="contenido-header">
                     <div>
@@ -104,7 +104,12 @@
            <?php echo $contenido; ?>
         </div>
       </main>
-    <?php } ?>
+    <?php }else{
+              ?><div>
+             <?php echo $contenido; ?>
+           </div>
+           <?php
+    }?>
 
             
 </html>

@@ -1,14 +1,15 @@
 <?php
     require_once '../includes/app.php';
 
-use controllers\CrearCliente;
-use controllers\LoginController;
+    use controllers\CrearCliente;
+    use controllers\LoginController;
     use MVC\router;
 
     $router = new router();
     //home
     $router->get('proyecto_idaca/public/home', [LoginController::class, 'home']);
 
+    // login
     $router->get('proyecto_idaca/public', [LoginController::class, 'login']);
     $router->get('proyecto_idaca/public/login', [LoginController::class, 'login']);
     $router->post('proyecto_idaca/public', [LoginController::class, 'login']);

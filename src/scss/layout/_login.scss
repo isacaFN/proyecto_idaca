@@ -3,25 +3,29 @@
 
 body {
     height: 100vh;
+    background-color: v.$blanco;
+}
+
+.contenedor-login {
+    height: 100vh;
+    @include m.flex;
+    gap: 20rem;
 }
 
 .formulario-login {
     height: 100vh;
-    @include m.flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     border-radius: 1rem;
+    @include m.flex;
     
 }
 .contenedor-formulario {
-    @extend .formulario-login;
+    @include m.flex;
+    flex-direction: column;
     height: 75vh;
     width: 70vh;
-    gap: 2rem;
-    background-color: v.$blanco;
 
     span{
+        margin: 5rem 0;
         color: v.$negro;
         font-size: 2.5rem;
     }
@@ -32,24 +36,20 @@ body {
     }
 }
 .contenedor-formulario-input{
-    @extend .formulario-login;
+    @include m.flex;
+    flex-direction: column;
 
     input{
         border: 1.5px solid v.$rojo;
         border-radius: 2rem;
         margin: 1.7rem 0rem;
-        width: 56rem;
+        width: 70rem;
         height: 6rem;
     }
 
 
 }
-.imagen-login img {
-    //filter: brightness(1.1);
-    // mix-blend-mode: multiply;
-    width: 15rem;
-    margin-top: 2rem;
-}
+
 .contenedor-boton{
     margin-bottom: 2rem;
 }
@@ -65,4 +65,11 @@ body {
 .contenedor-formulario a:hover{
     text-decoration: underline;
     text-underline-offset: .5em;
+}
+
+.imagen-login{
+    img{
+        width: 65rem;
+        height: 64rem;
+    }
 }

@@ -1,9 +1,7 @@
 <main>  
+        <div class="contenedor-login">
         <form class="formulario-login" action="proyecto_idaca/public" method="post">
             <div class="contenedor-formulario">
-                <div class="imagen-login">
-                    <img src="../public/build/img/idacasvgb.svg" alt="logo">
-                 </div>
                  <h3>¡Hola!</h3>
                  <span>Inicia sesión en tu cuenta para ingresar al sistema</span>
 
@@ -17,7 +15,14 @@
                     </div>
 
                     <a href="olvidepw">¿Olvidaste tu contraseña?</a> 
+                    
                  </div>
             </div>
         </form>
+        
+        <div class="imagen-login">
+            <img src="../public/build/img/login.png" alt="banner login">
+        </div>
+
+    </div>
 </main>

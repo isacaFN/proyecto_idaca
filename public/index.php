@@ -3,6 +3,7 @@
 
     use controllers\CrearCliente;
     use controllers\LoginController;
+    use controllers\UsuarioController;
     use MVC\router;
 
     $router = new router();
@@ -21,9 +22,12 @@
     $router->get('proyecto_idaca/public/recuperar', [LoginController::class, 'recuperar']);
     $router->post('proyecto_idaca/public/recuperar', [LoginController::class, 'recuperar']);
 
-    //crear usuario
-    //$router->get('/crear', [LoginController::class, 'crear']);
-    //$router->post('/crear', [LoginController::class, 'crear']);
+    //vista usuarios
+    $router->get('proyecto_idaca/public/usuarios', [UsuarioController::class, 'usuarios']);
+    
+    // crear usuarios
+    $router->get('proyecto_idaca/public/crearusuario', [UsuarioController::class, 'crearUsuario']);
+    $router->post('proyecto_idaca/public/crearusuario', [UsuarioController::class, 'crearUsuario']);
 
     // crear cliente
     $router->get('proyecto_idaca/public/crear-cliente', [CrearCliente::class, 'crearCliente']);

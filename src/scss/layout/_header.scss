@@ -7,11 +7,11 @@
 .contenedor-header{
     width: 100%;
     background-color: v.$blanco;
-    height: 5rem;
+    height: 4rem;
 }
 .contenido-header {    
         display: flex;
-        padding: 1rem 0;
+        padding-top: 1rem;
 
         @include m.tablet {
             display: flex;

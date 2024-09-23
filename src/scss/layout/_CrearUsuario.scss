@@ -1,0 +1,47 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+
+.contenedor-usuarios {
+    height: 100vh;
+    @include m.flex;
+    flex-direction: column; 
+    
+}
+.formulario-usuarios {
+    @include m.flex;
+    flex-direction: column;
+
+    input{
+        border: 1.5px solid v.$rojo;
+        border-radius: 2rem;
+        margin: 1.7rem 0rem;
+        width: 50rem;
+        height: 4rem;
+    }
+}
+.contenedor-nivel{
+    @include m.flex;
+    justify-content: space-between;
+    margin: 3rem 0;
+
+    label{
+        margin-right: 1rem;
+        font-size: 2.2rem;
+        font-weight: bold;
+    }
+
+    select{
+        border: 1.5px solid v.$rojo;
+        border-radius: 2rem;
+        height: 4rem;
+        width: 15rem;
+    }   
+}
+.contenedor-boton{
+    margin-bottom: 2rem;
+}
+.contenedor-boton input{
+    width: 22rem;
+    height: 6rem;
+}

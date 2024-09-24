@@ -38,8 +38,15 @@ class UsuarioController{
 
                     // enviar el correo electronico con el token
                     $email = new Email($usuario->correo, $usuario->token, $usuario->nombre);
+                    $email->enviarConfirmacion();
 
-                    debugear($email);
+                    // crear usuario en la BD
+                    $resultado = $usuario->guardar();
+
+                    if($resultado){
+                        header('location: mensaje');
+                    }
+
                 }
             }
 
@@ -49,5 +56,36 @@ class UsuarioController{
         ['usuario' => $usuario,
         'alertas' => $alertas]
         );
+    }
+
+    public static function confirmarRegistro(router $router){
+        $alertas = [];
+
+        $token = s($_GET['token']);
+
+        $usuario = Usuario::where('token', $token);
+
+        if(empty($usuario)){
+            Usuario::setAlerta('error', 'El token no es valido');
+        }else{
+
+            $usuario->permiso = "1";
+            $usuario->token = null;
+            $usuario->guardar();
+
+            Usuario::setAlerta('exito', 'El registro ha sido confirmado');
+
+        }
+
+        $alertas = Usuario::getAlertas();
+
+        $router->render('users/confirmar-registro',[
+            'alertas' => $alertas
+        ]);
+    }
+
+    public static function mensaje(router $router){
+        $router->render('users/mensaje');
+
     }
 }

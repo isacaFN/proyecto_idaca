@@ -29,9 +29,14 @@
     $router->get('proyecto_idaca/public/crearusuario', [UsuarioController::class, 'crearUsuario']);
     $router->post('proyecto_idaca/public/crearusuario', [UsuarioController::class, 'crearUsuario']);
 
+    // confirmar registro de usuario
+    $router->get('proyecto_idaca/public/confirmar-registro', [UsuarioController::class, 'confirmarRegistro']);
+    $router->get('proyecto_idaca/public/mensaje', [UsuarioController::class, 'mensaje']);
+
     // crear cliente
     $router->get('proyecto_idaca/public/crear-cliente', [CrearCliente::class, 'crearCliente']);
     $router->post('proyecto_idaca/public/crear-cliente', [CrearCliente::class, 'crearCliente']);
+
 
     // Comprobar rutas
     $router->comprobarRutas();

@@ -57,7 +57,7 @@ class router
         // entonces incluimos la vista en el layout
         include_once __DIR__ . "/views/$view.php";
 
-        if($view === 'auth/login' || $view === 'auth/olvidepw'){
+        if($view === 'auth/login' || $view === 'auth/olvidepw' || $view === 'users/confirmar-registro' ){
             $login = true;
         }else{
             $login = false;

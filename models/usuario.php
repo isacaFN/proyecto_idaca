@@ -21,8 +21,8 @@ class Usuario extends ActiveRecord {
         $this->nivel = $args['nivel'] ?? '';
         $this->correo = $args['correo'] ?? '';
         $this->password = $args['password'] ?? '';
-        $this->permiso = $args['permiso'] ?? null;
-        $this->token = $args['token'] ?? '';
+        $this->permiso = $args['permiso'] ?? '0';
+        $this->token = $args['token'] ?? '0';
     }
 
     // mensaje de validacion de campos

@@ -15,4 +15,10 @@
         color: v.$blanco;
         font-weight: bold;
     }
+
+    &.exito{
+        background-color: v.$verde; 
+        color: v.$blanco;
+        font-weight: bold;
+    }
 }

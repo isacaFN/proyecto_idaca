@@ -1,0 +1,18 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.confirmacion{
+    height: 100vh;
+    @include m.flex;
+    flex-direction: column;
+
+    a{
+        margin: 1rem 0;
+    }
+    
+    img{
+        margin-top: 6rem;
+        width: 35rem;
+        height: 34rem; 
+    }
+}

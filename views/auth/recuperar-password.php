@@ -4,13 +4,13 @@
         <img src="../public/build/img/logoidaca.jpg">
     </div>
     <div class="formulario-olvidepw">
-        <h2>Introduzca su correo</h2>
-        <p>Por favor Ingresa tu correo electronico para recibir instrucciones</p>
+        <h2>Restablecer contraseña</h2>
+        <p>A continuacion ingresa tu nueva contraseña</p>
         <?php include_once __DIR__ . '/../templates/alertas.php'; ?>
-        <form class="olvidepw" action="olvidepw" method="post">
-            <input type="email" name="correo">
-            <input class="boton" type="submit" value="Enviar Intrucciones">
-
+        <?php if($error){ return; }?>
+        <form class="olvidepw" method="post">
+            <input type="password" name="password" placeholder="Nueva Contraseña">
+            <input class="boton" type="submit" value="Guardar contraseña">
         </form>
 
         <a href="login">Iniciar sesión</a>

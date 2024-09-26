@@ -41,5 +41,31 @@ class Email{
          $mail->send();
 
     }
+
+    public function enviarIntrucciones(){
+        $mail = new PHPMailer;
+        $mail->isSMTP();
+        $mail->Host = 'sandbox.smtp.mailtrap.io';
+        $mail->SMTPAuth = true;
+        $mail->Port = 2525;
+        $mail->Username = '9abee675358a74';
+        $mail->Password = '7bf63fd8fb3b46';
+
+        $mail->setFrom('contactos@desdeidaca.com');
+        $mail->addAddress('contactos@asdasdsaasd.com', 'asdasdsaasd.com');
+        $mail->Subject = 'Restablecer contraseña';
+
+        $mail->isHTML(true);
+        $mail->CharSet = 'UTF-8';
+        $contenido = "<html>";
+        $contenido .= "<p><strong> Hola " . $this->nombre ."</strong> Haz solicitado restablecer tu contraseña, Haz click en el siguiente enlace para completar el proceso </p>";
+        $contenido .= "<p><a href='http://localhost/proyecto_idaca/public/recuperar?token=". $this->token ."'>Restablecer contraseña</a></p>";
+        $contenido .= "</html>";
+
+        $mail->Body = $contenido;
+
+        
+         $mail->send();
+    }
     
 }

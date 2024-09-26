@@ -57,7 +57,15 @@ class router
         // entonces incluimos la vista en el layout
         include_once __DIR__ . "/views/$view.php";
 
-        if($view === 'auth/login' || $view === 'auth/olvidepw' || $view === 'users/confirmar-registro' ){
+        // verificamos si la url contiene recuperar-password, para ocultarle las bara de navegacion etc.
+        if(str_contains($view, 'recuperar-password')){
+            $recuperarPassword = true;
+        }else{
+            $recuperarPassword = false;
+        }
+
+        // ocultar barras de navegacion
+        if($view === 'auth/login' || $view === 'auth/olvidepw' || $view === 'users/confirmarRegistro' || $recuperarPassword == true ){
             $login = true;
         }else{
             $login = false;

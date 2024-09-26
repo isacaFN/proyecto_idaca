@@ -1,14 +1,16 @@
 <main>  
         <div class="contenedor-login">
-        <form class="formulario-login" action="proyecto_idaca/public" method="post">
+        <form class="formulario-login" action="login" method="post">
             <div class="contenedor-formulario">
                  <h3>¡Hola!</h3>
                  <span>Inicia sesión en tu cuenta para ingresar al sistema</span>
 
-                 <div class="contenedor-formulario-input">
-                    <input type="email" name="username" placeholder="Correo electronico" required>
+                 <?php include_once __DIR__ . '/../templates/alertas.php'; ?>
 
-                    <input type="password" name="password" placeholder="Contraseña" required>
+                 <div class="contenedor-formulario-input">
+                    <input type="email" name="correo" placeholder="Correo electronico" >
+
+                    <input type="password" name="password" placeholder="Contraseña">
 
                     <div class="contenedor-boton">
                         <input class="boton" type="submit" value="Ingresar"">

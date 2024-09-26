@@ -79,7 +79,7 @@ class UsuarioController{
 
         $alertas = Usuario::getAlertas();
 
-        $router->render('users/confirmar-registro',[
+        $router->render('users/confirmarRegistro',[
             'alertas' => $alertas
         ]);
     }

@@ -13,7 +13,7 @@
     // login
     $router->get('proyecto_idaca/public', [LoginController::class, 'login']);
     $router->get('proyecto_idaca/public/login', [LoginController::class, 'login']);
-    $router->post('proyecto_idaca/public', [LoginController::class, 'login']);
+    $router->post('proyecto_idaca/public/login', [LoginController::class, 'login']);
     $router->get('proyecto_idaca/public/logout', [LoginController::class, 'logout']);
 
     //recuperar password

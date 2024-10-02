@@ -19,14 +19,16 @@ class LoginController{
 
                 if($usuario){
                     if($usuario->comprobarPasswordANDpermiso($auth->password)){
+                        
                         session_start();
                         $_SESSION['id'] = $usuario->id;
                         $_SESSION['nombre'] = $usuario->nombre;
+                        $_SESSION['apellido'] = $usuario->apellido;
                         $_SESSION['correo'] = $usuario->correo;
                         $_SESSION['nivel'] = $usuario->nivel;
                         $_SESSION['login'] = true;
 
-                        // redireccionar a la pagina de inicio
+                        // redireccionar a la pagina home
                         header('location: home');
 
                     }

@@ -20,6 +20,12 @@
             flex-direction: row;
         }
 
+        p{
+            font-size: 1.3rem;
+            margin: 0 0 0 10rem;
+            font-weight: bold;
+        }
+
         div{
             margin: 0 2rem;
         }
@@ -30,7 +36,7 @@
 }
 
 .contenedor-main{
-    height: calc(100vh - 5rem);
+    height: calc(100vh - 3.9rem); 
     display: grid;
     grid-template-columns: 1fr 7fr;
     grid-template-rows: 1fr;
@@ -40,11 +46,11 @@
     display: flex;
     height: 100%;
     flex-direction: column;
-    background-color: v.$grisOscuro;
+    background-color: v.$principal;
     overflow-y: auto;
 
     a{
-        color: v.$blanco;
+        color: v.$color_fuente_principal;
         margin-left: 1rem;
         padding: .5rem 0;
     }

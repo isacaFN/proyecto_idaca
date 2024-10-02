@@ -9,7 +9,12 @@ use MVC\router;
 class UsuarioController{
 
     public static function usuarios(router $router){
-        $router->render('users/usuarios');
+
+        $usuarios = Usuario::all();
+
+        $router->render('users/usuarios',[
+            'usuarios' => $usuarios
+        ]);
     }
 
     public static function crearUsuario(router $router){

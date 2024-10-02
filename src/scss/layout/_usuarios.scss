@@ -1,0 +1,41 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.contenedor-lista-usuarios {
+    height: 100vh;
+
+    margin: 2rem 0 0 2rem;
+    
+}
+
+.tabla{
+    width: 80%;
+    border-collapse: collapse;
+    
+    th, td{
+        border: 1px solid v.$gris;
+        padding: 1rem;
+    }
+}
+
+.link-nuevo-usuario{
+    width: 80%;
+    margin-top: 3rem;
+    @include m.flex;
+    justify-content: flex-end;  
+    
+    a{
+        color: v.$rojo;
+        font-size: 1.7rem;
+        transition: text-decoration 0.3s ease, transform 0.3s ease;
+
+    }
+
+    a:hover{
+        text-decoration: underline;
+        text-underline-offset: .5em;
+        transform: scale(1.1);
+
+    }
+
+}

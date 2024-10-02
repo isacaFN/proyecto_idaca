@@ -89,7 +89,7 @@ class ActiveRecord {
         }
     }
 
-    // Registros - CRUD
+    // CRUD
     public function guardar() {
         $resultado = '';
         if(!is_null($this->id)) {

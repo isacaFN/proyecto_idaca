@@ -1,12 +1,10 @@
-<?php 
-    if(isset($_GET['alert']) && $_GET['alert'] == 'success'){
-            echo '<div class="alerta exito">Cliente creado con exito</div>';
-    }
-?>
-
 <section class="contenedor-lista-usuarios">
         <h1>Clientes</h1>
         <table class="tabla">
+            <?php 
+            if(isset($_GET['alert']) && $_GET['alert'] == 'success'){
+                    echo '<div class="alerta exito">Cliente creado con exito</div>';
+            }?>
             <thead>
                 <tr>
                     <th>Rut</th>

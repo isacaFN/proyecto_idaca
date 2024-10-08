@@ -4,6 +4,7 @@
     use controllers\LoginController;
     use controllers\UsuarioController;
     use MVC\router;
+    use controllers\VentaController;
 
     $router = new router();
     //home
@@ -29,14 +30,17 @@
     //vista usuarios
     $router->get('proyecto_idaca/public/usuarios', [UsuarioController::class, 'usuarios']);
     
-    // crear usuarios
+    // crear usuarios(administrador, vendedor, chofer)
     $router->get('proyecto_idaca/public/crearusuario', [UsuarioController::class, 'crearUsuario']);
-    $router->post('proyecto_idaca/public/crearusuario', [UsuarioController::class, 'crearUsuario']);
+    $router->post('proyecto_idaca/public/crearusuario', [UsuarioController::class, 'crearUsuario']); 
 
     // rutas clientes
     $router->get('proyecto_idaca/public/clientes', [ClienteController::class, 'clientes']);
     $router->get('proyecto_idaca/public/crearCliente', [ClienteController::class, 'crearCliente']);
     $router->post('proyecto_idaca/public/crearCliente', [ClienteController::class, 'crearCliente']);
+
+    // rutas ventas
+    $router->get('proyecto_idaca/public/ventas', [VentaController::class, 'ventas']);
 
 
     // Comprobar rutas

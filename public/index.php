@@ -1,6 +1,8 @@
 <?php
     require_once '../includes/app.php';
-    use controllers\ClienteController;
+
+use controllers\ApiController;
+use controllers\ClienteController;
     use controllers\LoginController;
     use controllers\UsuarioController;
     use MVC\router;
@@ -29,6 +31,9 @@
     // de aqui para abajo todo es privado
     //vista usuarios
     $router->get('proyecto_idaca/public/usuarios', [UsuarioController::class, 'usuarios']);
+
+    // Api Usuarios
+    $router->get('proyecto_idaca/public/api/usuarios', [ApiController::class, 'apiUsuarios']);
     
     // crear usuarios(administrador, vendedor, chofer)
     $router->get('proyecto_idaca/public/crearusuario', [UsuarioController::class, 'crearUsuario']);

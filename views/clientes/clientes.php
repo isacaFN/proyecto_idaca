@@ -1,3 +1,9 @@
+<?php 
+    if(isset($_GET['alert']) && $_GET['alert'] == 'success'){
+            echo '<div class="alerta exito">Cliente creado con exito</div>';
+    }
+?>
+
 <section class="contenedor-lista-usuarios">
         <h1>Clientes</h1>
         <table class="tabla">
@@ -15,7 +21,7 @@
             foreach($clientes as $cliente):
                 ?>
                 <tr>
-                    <td><?php echo $cliente->id; ?></td>
+                    <td><?php echo $cliente->dni; ?></td>
                     <td><?php echo $cliente->nombre; ?></td>
                     <td><?php echo $cliente->telefono; ?></td>
                     <td><?php echo $cliente->correo; ?></td>
@@ -27,7 +33,7 @@
         </table>
         
         <div class="link-nuevo-usuario">
-            <a href="crear-cliente" >Crear nuevo cliente</button>
+            <a href="crearCliente" >Crear nuevo cliente</button>
         </div>
 
 </section>

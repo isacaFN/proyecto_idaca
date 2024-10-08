@@ -35,8 +35,8 @@
 
     // rutas clientes
     $router->get('proyecto_idaca/public/clientes', [ClienteController::class, 'clientes']);
-    $router->get('proyecto_idaca/public/crear-cliente', [ClienteController::class, 'crearCliente']);
-    $router->post('proyecto_idaca/public/crear-cliente', [ClienteController::class, 'crearCliente']);
+    $router->get('proyecto_idaca/public/crearCliente', [ClienteController::class, 'crearCliente']);
+    $router->post('proyecto_idaca/public/crearCliente', [ClienteController::class, 'crearCliente']);
 
 
     // Comprobar rutas

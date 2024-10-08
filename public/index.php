@@ -1,7 +1,6 @@
 <?php
     require_once '../includes/app.php';
-
-    use controllers\CrearCliente;
+    use controllers\ClienteController;
     use controllers\LoginController;
     use controllers\UsuarioController;
     use MVC\router;
@@ -22,6 +21,11 @@
     $router->get('proyecto_idaca/public/recuperar', [LoginController::class, 'recuperar']);
     $router->post('proyecto_idaca/public/recuperar', [LoginController::class, 'recuperar']);
 
+    // confirmar registro de usuario
+    $router->get('proyecto_idaca/public/confirmar-registro', [UsuarioController::class, 'confirmarRegistro']);
+    $router->get('proyecto_idaca/public/mensaje', [UsuarioController::class, 'mensaje']);
+
+    // de aqui para abajo todo es privado
     //vista usuarios
     $router->get('proyecto_idaca/public/usuarios', [UsuarioController::class, 'usuarios']);
     
@@ -29,13 +33,10 @@
     $router->get('proyecto_idaca/public/crearusuario', [UsuarioController::class, 'crearUsuario']);
     $router->post('proyecto_idaca/public/crearusuario', [UsuarioController::class, 'crearUsuario']);
 
-    // confirmar registro de usuario
-    $router->get('proyecto_idaca/public/confirmar-registro', [UsuarioController::class, 'confirmarRegistro']);
-    $router->get('proyecto_idaca/public/mensaje', [UsuarioController::class, 'mensaje']);
-
-    // crear cliente
-    $router->get('proyecto_idaca/public/crear-cliente', [CrearCliente::class, 'crearCliente']);
-    $router->post('proyecto_idaca/public/crear-cliente', [CrearCliente::class, 'crearCliente']);
+    // rutas clientes
+    $router->get('proyecto_idaca/public/clientes', [ClienteController::class, 'clientes']);
+    $router->get('proyecto_idaca/public/crear-cliente', [ClienteController::class, 'crearCliente']);
+    $router->post('proyecto_idaca/public/crear-cliente', [ClienteController::class, 'crearCliente']);
 
 
     // Comprobar rutas

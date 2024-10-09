@@ -12,6 +12,8 @@
     <link rel="preload" href="../public/build/css/app.css" as="style">
     <link href="../public/build/css/app.css" rel="stylesheet"> 
   </head>
+
+  <script type="module" src="../public/build/js/app.js"></script>
   <?php if(!$login){ ?>
   <body class="body-home">
         <div class="contenedor-header">

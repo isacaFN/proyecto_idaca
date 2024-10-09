@@ -1,1 +1,1 @@
-document.addEventListener("DOMContentLoaded",(function(){}));
+function iniciarapp(){consultarAPI()}async function consultarAPI(){try{const o="http://localhost/proyecto_idaca/public/api/usuarios",n=(await fetch(o)).json();console.log(n)}catch(o){console.log(o)}}document.addEventListener("DOMContentLoaded",(function(){iniciarapp()}));

@@ -34,6 +34,8 @@ use controllers\ClienteController;
 
     // Api Usuarios
     $router->get('proyecto_idaca/public/api/usuarios', [ApiController::class, 'apiUsuarios']);
+    // api clientes
+    $router->get('proyecto_idaca/public/api/clientes', [ApiController::class, 'apiClientes']);
     
     // crear usuarios(administrador, vendedor, chofer)
     $router->get('proyecto_idaca/public/crearusuario', [UsuarioController::class, 'crearUsuario']);

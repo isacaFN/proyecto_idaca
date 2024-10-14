@@ -20,5 +20,32 @@ async function consultarAPI(){
 }
 
 function mostrarUsuarios(usuarios){
-    console.log(usuarios);
+    usuarios.forEach(usuario => {
+
+        const {id,  nombre, apellido, correo, nivel} = usuario;
+    
+        const nombreUsuario = document.createElement('TD');
+        nombreUsuario.textContent = nombre;
+    
+        const apellidoUsuario = document.createElement('TD');
+        apellidoUsuario.textContent = apellido;
+    
+        const correoUsuario = document.createElement('TD');
+        correoUsuario.textContent = correo;
+    
+        const nivelUsuario = document.createElement('TD');
+        nivelUsuario.textContent = nivel;
+    
+        const trUsuario = document.createElement('TR');
+        trUsuario.dataset.idUsuario = id;
+    
+        trUsuario.appendChild(nombreUsuario);
+        trUsuario.appendChild(apellidoUsuario);
+        trUsuario.appendChild(correoUsuario);
+        trUsuario.appendChild(nivelUsuario);
+
+        document.getElementById('usuarios').appendChild(trUsuario);
+        
+    });
+
 }

@@ -1,0 +1,49 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+
+section{
+    width: 80%;
+    margin-left: 2rem;
+}
+.buscar{
+    display: flex;
+    align-items: center;
+    background-color: v.$verde_boton;
+    color: v.$blanco;
+    border: none;
+    width: 8rem;
+    height: 3rem;
+    font-size: 1.5rem;
+
+
+}
+
+.buscar:hover{
+    cursor: pointer;
+}
+
+.contenedor-buscar-cliente{
+    display: flex;
+}
+
+input{
+    width: 15rem;
+    height: 3rem;
+    border: 1px solid v.$verde_boton;
+    
+}
+
+#nombreCliente{
+    margin: 3rem 0;
+    width: 100%;
+}
+
+.cliente{
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 2rem;
+    font-weight: bold;
+
+}

@@ -3,10 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
     iniciarapp();
 })
 
-function iniciarapp(){
-    consultarAPI(); // consultar al backend php
-}
-
 async function consultarAPI(){
     try {
         const url = 'http://localhost/proyecto_idaca/public/api/clientes';

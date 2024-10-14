@@ -23,7 +23,7 @@ function mostrarUsuarios(usuarios){
     usuarios.forEach(usuario => {
 
         const {id,  nombre, apellido, correo, nivel} = usuario;
-    
+     
         const nombreUsuario = document.createElement('TD');
         nombreUsuario.textContent = nombre;
     

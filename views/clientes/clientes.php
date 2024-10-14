@@ -1,3 +1,4 @@
+<script type="module" src="../public/build/js/clientes.js"></script>
 <section class="contenedor-lista-usuarios">
         <h1>Clientes</h1>
         <table class="tabla">
@@ -14,19 +15,7 @@
                     <th>direccion</th>
                 </tr>
             </thead>
-            <tbody>
-            <?php
-            foreach($clientes as $cliente):
-                ?>
-                <tr>
-                    <td><?php echo $cliente->dni; ?></td>
-                    <td><?php echo $cliente->nombre; ?></td>
-                    <td><?php echo $cliente->telefono; ?></td>
-                    <td><?php echo $cliente->correo; ?></td>
-                    <td><?php echo $cliente->direccion; ?></td>
-
-                </tr>
-            <?php endforeach; ?>
+            <tbody id="clientes" >
             </tbody>
         </table>
         

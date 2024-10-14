@@ -48,6 +48,8 @@ use controllers\ClienteController;
 
     // rutas ventas
     $router->get('proyecto_idaca/public/ventas', [VentaController::class, 'ventas']);
+    $router->get('proyecto_idaca/public/crearVenta', [VentaController::class, 'crearVenta']);
+
 
 
     // Comprobar rutas

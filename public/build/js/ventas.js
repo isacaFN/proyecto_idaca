@@ -1,0 +1,1 @@
+function iniciarapp(){}document.addEventListener("DOMContentLoaded",(function(){iniciarapp()}));

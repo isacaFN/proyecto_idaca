@@ -13,4 +13,8 @@ class VentaController{
             
         ]);
     }
+
+    public static function crearVenta(router $router){
+        $router->render('ventas/crearVenta');
+    }
 }

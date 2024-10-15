@@ -47,3 +47,29 @@ input{
     font-weight: bold;
 
 }
+
+
+#producto{
+    td{
+        input{
+            border: 1px solid v.$gris;
+        }
+    }
+}
+
+.boton{
+    width: 24rem;
+    font-size: 1.2rem;
+    height: 3rem;
+    margin: 2rem 1rem;
+}
+
+.contenedor-boton{
+    width: 100%;
+    display: flex;  
+    justify-content: center;
+}
+
+.tabla{
+    width: 100%;
+}

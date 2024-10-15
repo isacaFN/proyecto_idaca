@@ -29,16 +29,40 @@
         <thead>
             <tr>
                 <th>Cod producto</th>
-                <th>Nombre</th>
+                <th>Nombre producto</th>
                 <th>Cantidad(KG)</th>
                 <th>Precio unitario</th>
-                <th>Total</th>
+                <th>Sub Total</th>
                 <th>Eliminar</th>
             </tr>
         </thead>
 
         <tbody id="producto" >
+            <tr>
+                <td>
+                    <input>
+                </td>
 
+                <td>
+                    <input>
+                </td>
+
+                <td>
+                    <input type="number">
+                </td>
+                <td>
+                    <input type="number">
+                </td>
+                <td>
+                    <input readonly>
+                </td>
+                <td></td>
+            </tr>
         </tbody>
     </table>
+
+    <div class="contenedor-boton">
+        <button class="boton" type="button" onclick="agregarlinea()"> Agregar linea de detalle</button>
+        <button class="boton" type="button" onclick="eliminarlinea()"> Eliminar linea de detalle</button>
+    </div>
 </section>

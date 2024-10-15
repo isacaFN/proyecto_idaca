@@ -57,4 +57,52 @@ function mostrar(dni, nombre, apellido){
 
 }
 
+function agregarlinea(){
+
+    const codproductoInput = document.createElement('input');
+    const codproducto = document.createElement('TD');
+    codproducto.appendChild(codproductoInput);
+
+    const NombreProducto = document.createElement('TD');
+    const NombrProductoInput = document.createElement('input');
+    NombreProducto.appendChild(NombrProductoInput);
+
+    const Cantidad = document.createElement('TD');
+    const input2 = document.createElement('input');
+    input2.type = 'number';
+    Cantidad.appendChild(input2);
+
+
+    const Precio = document.createElement('TD');  
+    const input3 = document.createElement('input');
+    Precio.appendChild(input3);
+
+    const Subtotal = document.createElement('TD');
+    const input4 = document.createElement('input');
+    input3.setAttribute('readonly', 'true');
+    Subtotal.appendChild(input4);
+
+    const Eliminar = document.createElement('TD');
+    Eliminar.textContent = '';
+
+    const trVenta = document.createElement('TR');
+    trVenta.appendChild(codproducto);
+    trVenta.appendChild(NombreProducto);
+    trVenta.appendChild(Cantidad);
+    trVenta.appendChild(Precio);
+    trVenta.appendChild(Subtotal);
+    trVenta.appendChild(Eliminar);
+
+    document.getElementById('producto').appendChild(trVenta);
+}
+
+function eliminarlinea(){
+    const trVenta = document.getElementById('producto').lastChild;
+    trVenta.remove();
+}
+    
+
+
 window.buscar = buscar;
+window.agregarlinea = agregarlinea;
+window.eliminarlinea = eliminarlinea;

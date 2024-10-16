@@ -33,38 +33,28 @@
                 <th>Cantidad(KG)</th>
                 <th>Precio unitario</th>
                 <th>Sub Total</th>
-                <th>Limpiar</th>
             </tr>
         </thead>
-
+<form id="formularioVenta">
         <tbody id="producto" >
-            <tr>
+            <tr id="trVenta0">
                 <td>
-                    <input>
+                    <input id="codproducto0" class="codproducto" type="text">
                 </td>
 
                 <td>
-                    <input>
+                    <input id="nombreProducto0" class="nomproducto" type="text">
+                    <div id="sugerencias" class="sugerencias"></div>
                 </td>
 
                 <td>
-                    <input type="number">
+                    <input id="cantidadProducto0" class="cantidadproducto" type="number">
                 </td>
                 <td>
-                    <input type="number">
+                    <input id="precioProducto0" class="precioproducto" type="number" readonly>
                 </td>
                 <td>
-                    <input readonly>
-                </td>
-                <td class="celda_limpiar">
-                    <div class="icono_limpiar" title="Limpiar Fila">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clear-all" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ff2825" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M8 6h12" />
-                        <path d="M6 12h12" />
-                        <path d="M4 18h12" />
-                        </svg>
-                    </div>
+                    <input id="subtotalProducto0" class="subtotalproducto" type="number" readonly>
                 </td>
             </tr>
         </tbody>
@@ -72,7 +62,8 @@
 
     <div class="contenedor-boton">
         <button class="boton" type="button" onclick="agregarlinea()"> Agregar linea de detalle</button>
-        <button class="boton" type="button" onclick="eliminarlinea()"> Eliminar linea de detalle</button>
+        <button class="boton ocultar" type="button" onclick="eliminarlinea()"> Eliminar linea de detalle</button>
+
     </div>
 
     <div class="contenedor_pago">
@@ -119,4 +110,11 @@
         </div>
     </div>
 </div>
+
+    <div class="contenedor-boton">
+            <button class="boton" type="submit" ">Generar Venta</button>
+
+    </div>
+
+</form>
 </section>

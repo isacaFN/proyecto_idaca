@@ -175,3 +175,26 @@ input{
     }
 
 }
+
+.ocultar{
+    display: none;
+}
+
+.sugerencias {
+    font-size: 1rem;
+    border: 1px solid v.$grisOscuro;
+    border-radius: 5px;
+    max-height: 150px;
+    overflow-y: auto;
+    display: none; 
+    position: absolute;
+    background: v.$blanco;
+    z-index: 10;
+}
+.sugerencia {
+    padding: 10px;
+    cursor: pointer;
+}
+.sugerencia:hover {
+    background-color: v.$blanco
+}

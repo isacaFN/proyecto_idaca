@@ -37,24 +37,24 @@
         </thead>
 <form id="formularioVenta">
         <tbody id="producto" >
-            <tr id="trVenta0">
+            <tr id="trVenta">
                 <td>
-                    <input id="codproducto0" class="codproducto" type="text">
+                    <input id="codproducto" class="codProducto" type="text">
                 </td>
 
                 <td>
-                    <input id="nombreProducto0" class="nomproducto" type="text">
+                    <input id="nombreProducto" class="nombreProducto" type="text">
                     <div id="sugerencias" class="sugerencias"></div>
                 </td>
 
                 <td>
-                    <input id="cantidadProducto0" class="cantidadproducto" type="number">
+                    <input id="cantidadProducto" class="cantidadProducto" type="number">
                 </td>
                 <td>
-                    <input id="precioProducto0" class="precioproducto" type="number" readonly>
+                    <input id="precioProducto" class="precioProducto" type="number" readonly>
                 </td>
                 <td>
-                    <input id="subtotalProducto0" class="subtotalproducto" type="number" readonly>
+                    <input id="subtotalProducto" class="subtotalProducto" type="number" readonly>
                 </td>
             </tr>
         </tbody>

@@ -1,6 +1,7 @@
 let rutCliente;
 let filas =0 ;
 let url;
+let arrayproductos = [];
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -40,7 +41,8 @@ async function consultarAPI(url){
         }
 
         if(url.includes('productos')){
-            autocompletar(convertir);
+            arrayproductos = convertir;
+            autocompletar(arrayproductos);
         }
         
     } catch (error) {
@@ -49,41 +51,27 @@ async function consultarAPI(url){
     }
 }
 
-function autocompletar(convertir){
+function autocompletar(arrayproductos){
 
-    const formulario = document.getElementById('producto');
+    const inputs = document.querySelectorAll('.nombreProducto');
 
-    formulario.addEventListener('click', function(event) {
-        if (event.target.tagName === 'INPUT') {
-            const inputActual = event.target;
+    inputs.forEach(function(input) {
+    // Crear un contenedor único de sugerencias para cada input
+    const sugerenciasDiv = document.createElement('div');
+    sugerenciasDiv.classList.add('sugerencias');
+    input.parentElement.appendChild(sugerenciasDiv); // Añadir el div de sugerencias después del input
 
-            // Obtener la clase del input
-            const clasesInput = inputActual.classList;
-            console.log('Clases del input:', clasesInput);
-
-            // Obtener el abuelo (primer contenedor)
-            const abuelo = inputActual.parentElement.parentElement; // Primer contenedor
-            if (abuelo) {
-                console.log('Clase del primer contenedor (abuelo):', abuelo.id);
-            } else {
-                console.log('No se encontró el abuelo.');
-            }
-        }
-    }); 
-
-    const input = document.getElementById('nombreProducto0');
-    const sugerenciasDiv = document.getElementById('sugerencias');
-
-    input.addEventListener('input', function() {
+    // Evento de input en cada campo de texto
+    input.addEventListener('input', function(event) {
         const valorIngresado = input.value.toLowerCase(); // Valor en minúsculas
         sugerenciasDiv.innerHTML = ''; // Limpiar sugerencias anteriores
 
         // Filtrar las sugerencias basándose en el nombre del producto
-        const coincidencias = convertir.filter(item => {
+        const coincidencias = arrayproductos.filter(item => {
             return typeof item.nomprod === 'string' && item.nomprod.toLowerCase().includes(valorIngresado);
         });
 
-        // Mostrar sugerencias
+        // Mostrar sugerencias si hay coincidencias
         if (coincidencias.length > 0) {
             sugerenciasDiv.style.display = 'block'; // Mostrar la lista de sugerencias
             coincidencias.forEach(coincidencia => {
@@ -91,31 +79,57 @@ function autocompletar(convertir){
                 divSugerencia.classList.add('sugerencia');
                 divSugerencia.textContent = coincidencia.nomprod; // Usar el nombre del producto
 
-                // Añadir un evento click para autocompletar
+                // Añadir evento click para autocompletar
                 divSugerencia.addEventListener('click', function() {
                     input.value = coincidencia.nomprod; // Completar el input
                     sugerenciasDiv.innerHTML = ''; // Limpiar sugerencias
                     sugerenciasDiv.style.display = 'none'; // Ocultar sugerencias
 
-                // completamos el restante de los input de la misma fila
+                    // Obtener el contenedor abuelo
+                    const contenedor = input.parentElement.parentElement; // Primer contenedor
 
+                    if (contenedor) {
+                        arrayproductos.forEach(valor => {
+                            if (coincidencia.nomprod === valor.nomprod) {
+                                contenedor.dataset.idproducto = valor.codproducto; 
+
+                                const trVenta = document.getElementById(contenedor.id);
+                                const inputCodProducto = trVenta.querySelector('.codProducto');
+                                inputCodProducto.value = valor.codproducto; 
+
+                                const inputPrecioProducto = trVenta.querySelector('.precioProducto');
+                                inputPrecioProducto.value = valor.precio;
+
+                                const inputCantidadProducto = trVenta.querySelector('.cantidadProducto');
+                                
+                                inputCantidadProducto.addEventListener('click', function(event) {
+                                    if (!inputCantidadProducto.contains(event.target)) {
+                                        console.log('fuera del input');
+                                    }else{
+                                        console.log('dentro del input');
+                                    }
+                                });
+                            }
+                        });
+                    }
                 });
 
-                sugerenciasDiv.appendChild(divSugerencia);
+                sugerenciasDiv.appendChild(divSugerencia); // Añadir la sugerencia al div
             });
         } else {
             sugerenciasDiv.style.display = 'none'; // Ocultar si no hay coincidencias
         }
     });
 
-    // Ocultar sugerencias al hacer clic fuera del input
+    // Evento global para detectar clics fuera del input y el contenedor de sugerencias
     document.addEventListener('click', function(event) {
+        // Asegurarse de que el clic no ocurrió dentro del input actual ni en las sugerencias
         if (!input.contains(event.target) && !sugerenciasDiv.contains(event.target)) {
             sugerenciasDiv.innerHTML = ''; // Limpiar sugerencias
             sugerenciasDiv.style.display = 'none'; // Ocultar sugerencias
         }
     });
-
+});
 }
 
 function buscarCliente(clientes){
@@ -157,25 +171,34 @@ function agregarlinea(){
 
     const codproductoInput = document.createElement('input');
     const codproducto = document.createElement('TD');
+    codproductoInput.id = 'codproducto' + filas;
+    codproductoInput.classList.add('codProducto');
     codproducto.appendChild(codproductoInput);
 
     const NombreProducto = document.createElement('TD');
     const NombrProductoInput = document.createElement('input');
+    NombrProductoInput.id = 'nombreProducto' + filas;
+    NombrProductoInput.classList.add('nombreProducto');
     NombreProducto.appendChild(NombrProductoInput);
 
     const Cantidad = document.createElement('TD');
     const input2 = document.createElement('input');
+    input2.id = 'cantidadProducto' + filas;
+    input2.classList.add('cantidadProducto');
     input2.type = 'number';
     Cantidad.appendChild(input2);
 
 
     const Precio = document.createElement('TD');  
     const input3 = document.createElement('input');
+    input3.id = 'precioProducto' + filas;
+    input3.classList.add('precioProducto');
     input3.setAttribute('readonly', 'true');
     Precio.appendChild(input3);
 
     const Subtotal = document.createElement('TD');
     const input4 = document.createElement('input');
+    input4.id = 'subtotalProducto' + filas;
     input4.setAttribute('readonly', 'true');
     Subtotal.appendChild(input4);
     
@@ -207,6 +230,8 @@ function agregarlinea(){
         botonEliminar.style.display = 'none';
     }
 
+    autocompletar(arrayproductos);
+
 }
 
 function eliminarlinea(){
@@ -223,8 +248,11 @@ function eliminarlinea(){
         const botonEliminar = document.querySelector('.ocultar');
         botonEliminar.style.display = 'none';
     }
+
+    autocompletar(arrayproductos);
+
 }
 
 window.buscar = buscar;
 window.agregarlinea = agregarlinea;
-window.eliminarlinea = eliminarlinea;
+window.eliminarlinea = eliminarlinea; 

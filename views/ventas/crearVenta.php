@@ -105,7 +105,7 @@
         </div>
 
         <div class="div_detallepago">
-            <label>Total:</label>
+            <label class="pago_total">Total:</label>
             <input type="number" name="total" id="total" readonly>
         </div>
     </div>

@@ -37,9 +37,9 @@
         </thead>
 <form id="formularioVenta">
         <tbody id="producto" >
-            <tr id="trVenta">
+            <tr id="trVenta0" class="tr">
                 <td>
-                    <input id="codproducto" class="codProducto" type="text">
+                    <input id="codproducto" class="codProducto" type="text" readonly>
                 </td>
 
                 <td>
@@ -84,13 +84,18 @@
 
         <div class="div_detallepago">
             <label>Descuento:</label>
-            <input type="number" name="descuento" id="descuento">
+            <input type="number" name="descuento" id="descuento" max="100"> 
             <label class="porcentaje">%</label>
         </div>
 
         <div class="div_detallepago">
             <label>Total Descuento:</label>
             <input type="number" name="totalDescuento" id="totalDescuento" readonly>
+        </div>
+
+        <div class="div_detallepago">
+            <label>Monto neto: </label>
+            <input type="number" name="montoNeto" id="montoNeto" readonly>
         </div>
 
         <div class="div_detallepago">

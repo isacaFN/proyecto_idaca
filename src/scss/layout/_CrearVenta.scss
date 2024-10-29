@@ -124,7 +124,7 @@ input{
 .detallePago{
     width: 50%;
     @include m.grid(2);
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-rows: repeat(6, 1fr);
     gap: 1rem;
 
     div{
@@ -155,11 +155,13 @@ input{
     grid-column: 1 / 3;
 }
 
-.detallePago div:nth-child(1){
+.detallePago div:nth-child(4){
     grid-column: 1 / 3;
 }
 
-.detallePago div:nth-child(6){
+
+
+.detallePago div:nth-child(7){
     grid-column: -3 / -1;
 }
 
@@ -177,6 +179,10 @@ input{
     .pago_total{
         font-weight: bold;
         text-transform: uppercase;
+    }
+
+    input{
+        text-align: end;
     }
 
 }

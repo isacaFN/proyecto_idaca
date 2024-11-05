@@ -84,10 +84,12 @@ function autocompletar(arrayproductos) {
                             sugerenciasDiv.innerHTML = '';
                             sugerenciasDiv.style.display = 'none';
 
+                            // subimos de forma jearquica en el dom para encontrar el tr mas cercano
                             const contenedor = input.closest('tr'); 
                             const productoSeleccionado = arrayproductos.find(item => item.nomprod === coincidencia.nomprod);
 
                             if (contenedor && productoSeleccionado) {
+                                contenedor.dataset.idproducto = productoSeleccionado.codproducto;
                                 const inputCodProducto = contenedor.querySelector('.codProducto');
                                 const inputPrecioProducto = contenedor.querySelector('.precioProducto');
                                 const inputCantidadProducto = contenedor.querySelector('.cantidadProducto');
@@ -191,7 +193,7 @@ function agregarlinea() {
     filas++;
 
     const trVenta = document.createElement('tr');
-    trVenta.classList.add('trVenta'); 
+    trVenta.classList.add('tr'); 
 
     // Crear y agregar celdas e inputs
     const codproductoInput = document.createElement('input');
@@ -332,14 +334,8 @@ function eliminarlinea(){
 
 function verificarVenta(){
     let suma = 0;
-    const inputsCodproducto = document.querySelectorAll('.cantidadProducto');
-
-    inputsCodproducto.forEach(input => {
-         let valor =  (parseFloat(input.value) || 0);
-         suma += valor;
-    });
-
-    console.log(suma);
+    const filas = document.querySelectorAll('.tr');
+    console.log(filas[0].dataset.idproducto);
 }
 
 

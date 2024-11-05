@@ -310,8 +310,6 @@ function mostrar(dni, nombre){
 
 }
 
-
-
 function eliminarlinea(){
 
     filas--;

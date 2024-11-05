@@ -26,7 +26,7 @@ function buscar(){
     }
 
     url = 'http://localhost/proyecto_idaca/public/api/clientes';
-    consultarAPI(url); // consultar al backend php
+    consultarAPI(url); // consultar al backend 'php
     
 
 }
@@ -244,15 +244,49 @@ function agregarlinea() {
 }
 
 function buscarCliente(clientes){
-    clientes.forEach(cliente => {
+    // buscamos el cliente con find para que nos devuelva el objeto completo si existe, para poder acceder a todos sus datos
+    const clienteEncontrado = clientes.find(cliente => cliente.dni === rutCliente);
+    if (clienteEncontrado) {
+        mostrar(clienteEncontrado.dni, clienteEncontrado.nombre);
+    }else{
+        clienteNoExiste();
+    }
+}
 
-        const {dni,  nombre } = cliente;
+function clienteNoExiste(){
+    let mostrar = `<div class="contendor-modal">
+    <div class="modal"> 
 
-        if(dni === rutCliente){
-            mostrar(dni, nombre)
-        }
-        
-    });
+    <h2>Cliente no existe</h2>
+    <a class="boton_verde" href="crearCliente">
+        Crear cliente 
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            >
+            <path d="M12.5 8l4 4l-4 4h4.5l4 -4l-4 -4z" />
+            <path d="M3.5 8l4 4l-4 4h4.5l4 -4l-4 -4z" />
+        </svg>
+    </a>
+</div>`;
+
+
+document.getElementById("modal-datos").innerHTML = mostrar;
+
+const contenedorModal = document.querySelector('.contendor-modal');
+
+contenedorModal.addEventListener('click', function(event) {
+    if (event.target === contenedorModal) {
+        contenedorModal.remove(); 
+    }
+});
 
 }
 

@@ -81,3 +81,18 @@ body > section {
 
 }
 
+.boton_verde {
+    background-color: v.$verde_boton;
+    color: v.$blanco;
+    padding: 1rem 3rem;
+    margin-top: 1rem;
+    text-decoration: none;
+    font-size: 2rem;
+    text-transform: uppercase;
+    font-weight: bold;  
+    border-radius: .5rem important; 
+    text-align: center;
+    border: none;
+    transition: .2s;
+}
+

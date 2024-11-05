@@ -51,90 +51,6 @@ async function consultarAPI(url){
     }
 }
 
-// function autocompletar(arrayproductos){
-
-//     const inputs = document.querySelectorAll('.nombreProducto');
-
-//     inputs.forEach(function(input) {
-//     // Crear un contenedor único de sugerencias para cada input
-//     const sugerenciasDiv = document.createElement('div');
-//     sugerenciasDiv.classList.add('sugerencias');
-//     input.parentElement.appendChild(sugerenciasDiv); // Añadir el div de sugerencias después del input
-
-//     // Evento de input en cada campo de texto
-//     input.addEventListener('input', function(event) {
-//         const valorIngresado = input.value.toLowerCase(); // Valor en minúsculas
-//         sugerenciasDiv.innerHTML = ''; // Limpiar sugerencias anteriores
-
-//         // Filtrar las sugerencias basándose en el nombre del producto
-//         const coincidencias = arrayproductos.filter(item => {
-//             return typeof item.nomprod === 'string' && item.nomprod.toLowerCase().includes(valorIngresado);
-//         });
-
-//         // Mostrar sugerencias si hay coincidencias
-//         if (coincidencias.length > 0) {
-//             sugerenciasDiv.style.display = 'block'; // Mostrar la lista de sugerencias
-//             coincidencias.forEach(coincidencia => {
-//                 const divSugerencia = document.createElement('div');
-//                 divSugerencia.classList.add('sugerencia');
-//                 divSugerencia.textContent = coincidencia.nomprod; // Usar el nombre del producto
-
-//                 // Añadir evento click para autocompletar
-//                 divSugerencia.addEventListener('click', function() {
-//                     input.value = coincidencia.nomprod; // Completar el input
-//                     sugerenciasDiv.innerHTML = ''; // Limpiar sugerencias
-//                     sugerenciasDiv.style.display = 'none'; // Ocultar sugerencias
-
-//                     // Obtener el contenedor abuelo
-//                     const contenedor = input.parentElement.parentElement; // Primer contenedor
-
-//                     if (contenedor) {
-//                         arrayproductos.forEach(valor => {
-//                             if (coincidencia.nomprod === valor.nomprod) {
-//                                 contenedor.dataset.idproducto = valor.codproducto; 
-
-//                                 const trVenta = document.getElementById(contenedor.id);
-//                                 const inputCodProducto = trVenta.querySelector('.codProducto');
-//                                 inputCodProducto.value = valor.codproducto; 
-
-//                                 const inputPrecioProducto = trVenta.querySelector('.precioProducto');
-//                                 inputPrecioProducto.value = valor.precio;
-
-//                                 const inputCantidadProducto = trVenta.querySelector('.cantidadProducto');
-                                
-//                                 document.addEventListener('click', function(event) {
-//                                     if (inputCantidadProducto.contains(event.target)) {
-//                                     }else{
-
-//                                         if(inputCantidadProducto.value > 0){
-//                                             const inputSubtotalProducto = trVenta.querySelector('.subtotalProducto');
-//                                             inputSubtotalProducto.value = inputPrecioProducto.value * inputCantidadProducto.value;
-//                                         }
-//                                     }
-//                                 });
-//                             }
-//                         });
-//                     }
-//                 });
-
-//                 sugerenciasDiv.appendChild(divSugerencia); // Añadir la sugerencia al div
-//             });
-//         } else {
-//             sugerenciasDiv.style.display = 'none'; // Ocultar si no hay coincidencias
-//         }
-//     });
-
-//     // Evento global para detectar clics fuera del input y el contenedor de sugerencias
-//     document.addEventListener('click', function(event) {
-//         // Asegurarse de que el clic no ocurrió dentro del input actual ni en las sugerencias
-//         if (!input.contains(event.target) && !sugerenciasDiv.contains(event.target)) {
-//             sugerenciasDiv.innerHTML = ''; // Limpiar sugerencias
-//             sugerenciasDiv.style.display = 'none'; // Ocultar sugerencias
-//         }
-//     });
-// });
-// }
-
 function autocompletar(arrayproductos) {
     document.addEventListener('focusin', function(event) {
         if (event.target.classList.contains('nombreProducto')) {
@@ -281,29 +197,37 @@ function agregarlinea() {
     const codproductoInput = document.createElement('input');
     const codproducto = document.createElement('td');
     codproductoInput.classList.add('codProducto');
+    codproductoInput.name = 'codproducto';
     codproducto.appendChild(codproductoInput);
 
     const NombreProducto = document.createElement('td');
     const NombrProductoInput = document.createElement('input');
     NombrProductoInput.classList.add('nombreProducto');
+    NombrProductoInput.setAttribute('required', 'true');
+    NombrProductoInput.name = `NombreProducto${filas}`;
+    NombrProductoInput.type = 'text';
     NombreProducto.appendChild(NombrProductoInput);
 
     const Cantidad = document.createElement('td');
     const input2 = document.createElement('input');
     input2.classList.add('cantidadProducto');
     input2.type = 'number';
+    input2.name = 'cantidad';
+    input2.setAttribute('required', 'true');
     Cantidad.appendChild(input2);
 
     const Precio = document.createElement('td');
     const input3 = document.createElement('input');
     input3.classList.add('precioProducto');
     input3.setAttribute('readonly', 'true');
+    input3.name = 'precio';
     Precio.appendChild(input3);
 
     const Subtotal = document.createElement('td');
     const input4 = document.createElement('input');
     input4.classList.add('subtotalProducto');
     input4.setAttribute('readonly', 'true');
+    input4.name = 'subtotal';
     Subtotal.appendChild(input4);
 
     trVenta.appendChild(codproducto);
@@ -374,6 +298,20 @@ function eliminarlinea(){
 
 }
 
+function verificarVenta(){
+    let suma = 0;
+    const inputsCodproducto = document.querySelectorAll('.cantidadProducto');
+
+    inputsCodproducto.forEach(input => {
+         let valor =  (parseFloat(input.value) || 0);
+         suma += valor;
+    });
+
+    console.log(suma);
+}
+
+
 window.buscar = buscar;
 window.agregarlinea = agregarlinea;
 window.eliminarlinea = eliminarlinea; 
+window.verificarVenta = verificarVenta;

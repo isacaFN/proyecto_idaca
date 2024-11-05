@@ -17,4 +17,12 @@ class VentaController{
     public static function crearVenta(router $router){
         $router->render('ventas/crearVenta');
     }
+    
+    public static function verificarVenta(router $router){
+
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            debugear($_POST);
+        }
+        $router->render('ventas/verificarVenta');
+    }
 }

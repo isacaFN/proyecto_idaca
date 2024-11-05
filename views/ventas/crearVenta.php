@@ -35,26 +35,26 @@
                 <th>Sub Total</th>
             </tr>
         </thead>
-<form id="formularioVenta">
+<form id="formularioVenta" action="verificarVenta" method="post">
         <tbody id="producto" >
             <tr id="trVenta0" class="tr">
                 <td>
-                    <input id="codproducto" class="codProducto" type="text" readonly>
+                    <input id="codproducto" class="codProducto" name="codproducto" type="text" readonly>
                 </td>
 
                 <td>
-                    <input id="nombreProducto" class="nombreProducto" type="text">
+                    <input id="nombreProducto" class="nombreProducto" name="nombreProducto" type="text" required>
                     <div id="sugerencias" class="sugerencias"></div>
                 </td>
 
                 <td>
-                    <input id="cantidadProducto" class="cantidadProducto" type="number">
+                    <input id="cantidadProducto" class="cantidadProducto" name="cantidad" type="number" required>
                 </td>
                 <td>
-                    <input id="precioProducto" class="precioProducto" type="number" readonly>
+                    <input id="precioProducto" class="precioProducto" name="precio" type="number" readonly>
                 </td>
                 <td>
-                    <input id="subtotalProducto" class="subtotalProducto" type="number" readonly>
+                    <input id="subtotalProducto" class="subtotalProducto" name="subtotal" type="number" readonly>
                 </td>
             </tr>
         </tbody>
@@ -117,7 +117,8 @@
 </div>
 
     <div class="contenedor-boton">
-            <button class="boton" type="submit" ">Generar Venta</button>
+            <button class="boton" type="button" onclick="verificarVenta()"> Verificar</button>
+            <!-- <button class="boton" type="submit" ">Generar Venta</button> -->
 
     </div>
 

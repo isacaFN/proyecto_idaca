@@ -51,6 +51,7 @@ use controllers\ClienteController;
     // rutas ventas
     $router->get('proyecto_idaca/public/ventas', [VentaController::class, 'ventas']);
     $router->get('proyecto_idaca/public/crearVenta', [VentaController::class, 'crearVenta']);
+    $router->post('proyecto_idaca/public/verificarVenta', [VentaController::class, 'verificarVenta']);
 
 
 

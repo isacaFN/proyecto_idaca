@@ -2,6 +2,7 @@ let rutCliente;
 let filas =0 ;
 let url;
 let arrayproductos = [];
+let productosFerificados = {};
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -312,30 +313,113 @@ function mostrar(dni, nombre){
 
 }
 
-function eliminarlinea(){
-
+function eliminarlinea() {
     filas--;
 
-    if (producto.children.length > 1){
+    if (producto.children.length > 1) {
+        // Obtener la última fila (tr) y su código de producto y cantidad
         const trVenta = document.getElementById('producto').lastChild;
+        const codigoProducto = trVenta.dataset.idproducto;
+        const cantidadProducto = parseFloat(trVenta.querySelector('.cantidadProducto').value);
+
+        // Restar la cantidad en productosFerificados si existe
+        if (productosFerificados[codigoProducto] !== undefined) {
+            productosFerificados[codigoProducto] -= cantidadProducto;
+
+            // Eliminar la clave si el valor llega a 0 o menos
+            if (productosFerificados[codigoProducto] <= 0) {
+                delete productosFerificados[codigoProducto];
+            }
+        }
+
         trVenta.remove();
     }
 
-    if (producto.children.length == 1){
-
+    // Mostrar/ocultar botón de eliminación
+    if (producto.children.length == 1) {
         const botonEliminar = document.querySelector('.ocultar');
         botonEliminar.style.display = 'none';
     }
 
+    // Llamar a las demás funciones
     autocompletar(arrayproductos, filas);
-    calcularSubtotalTotal()
+    calcularSubtotalTotal();
+
+    console.log(productosFerificados); // Verificar el estado de productosFerificados
+}
+
+function verificarVenta() {
+    const filas = document.querySelectorAll('.tr');
+
+    // Crear un mapa auxiliar para acceder a los productos más rápido
+    const productoMap = {};
+    arrayproductos.forEach(producto => {
+        productoMap[producto.codproducto] = producto;
+    });
+
+    // Iterar sobre cada fila y verificar solo las no procesadas
+    for (let i = 0; i < filas.length; i++) {
+        const fila = filas[i];
+
+        // Saltar la fila si ya fue procesada
+        if (fila.dataset.processed === "true") continue;
+
+        const datasetFilaActual = fila.dataset.idproducto;
+
+        // Si el producto existe en el mapa, procedemos
+        if (productoMap[datasetFilaActual]) {
+            // Convertimos el valor del input a número
+            let valorInput = parseFloat(fila.querySelector('.cantidadProducto').value);
+
+            // Solo insertar si es un número válido
+            if (!isNaN(valorInput)) {
+                insertarProducto(datasetFilaActual, valorInput);
+            }
+        }
+
+        // Marcar la fila como procesada
+        fila.dataset.processed = "true";
+    }
+
+    enviarProductosFerificados();
+}
+
+function insertarProducto(codproducto, cantidad) {
+    if (productosFerificados[codproducto] !== undefined) {
+        // Sumar el valor existente con el nuevo valor
+        productosFerificados[codproducto] += cantidad;
+    } else {
+        // Si no existe, asignar el valor directamente
+        productosFerificados[codproducto] = cantidad;
+    }
+
+    console.log(productosFerificados);
 
 }
 
-function verificarVenta(){
-    let suma = 0;
-    const filas = document.querySelectorAll('.tr');
-    console.log(filas[0].dataset.idproducto);
+async function enviarProductosFerificados() {
+    // Convertir el objeto productosFerificados a JSON
+    const productosFerificadosJSON = JSON.stringify(productosFerificados);
+
+    fetch('http://localhost/proyecto_idaca/public/api/productosFerificados', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: productosFerificadosJSON  // Enviar datos en formato JSON
+    })
+    .then(response => response.json())  // Convertir la respuesta a JSON
+    .then(data => {
+        if (data.status === 'success') {
+            console.log("respuesta del servidor:", data.data);
+            // Realizar alguna acción con los datos, como actualizar el UI
+        } else {
+            console.log("Hubo un error en la solicitud");
+        }
+    })
+    .catch(error => {
+        console.error("Error en la solicitud:", error);
+    });
 }
 
 

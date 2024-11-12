@@ -381,7 +381,7 @@ function verificarVenta() {
         fila.dataset.processed = "true";
     }
 
-    enviarProductosFerificados();
+    enviarProductosVerificados();
 }
 
 function insertarProducto(codproducto, cantidad) {
@@ -393,37 +393,68 @@ function insertarProducto(codproducto, cantidad) {
         productosFerificados[codproducto] = cantidad;
     }
 
-    console.log(productosFerificados);
 
 }
 
-async function enviarProductosFerificados() {
-    // Convertir el objeto productosFerificados a JSON
+async function enviarProductosVerificados() {
+    console.log(productosFerificados);
     const productosFerificadosJSON = JSON.stringify(productosFerificados);
 
-    fetch('http://localhost/proyecto_idaca/public/api/productosFerificados', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: productosFerificadosJSON  // Enviar datos en formato JSON
-    })
-    .then(response => response.json())  // Convertir la respuesta a JSON
-    .then(data => {
-        if (data.status === 'success') {
-            console.log("respuesta del servidor:", data.data);
-            // Realizar alguna acción con los datos, como actualizar el UI
-        } else {
-            console.log("Hubo un error en la solicitud");
-        }
-    })
-    .catch(error => {
-        console.error("Error en la solicitud:", error);
-    });
+    // try {
+    // const response = await fetch('http://localhost/proyecto_idaca/public/verificarVenta', {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: productosFerificadosJSON
+    // });
+    // const text = await response.text();
+
+    // // Intentar convertir a JSON si es posible
+    // try {
+    //     const data = JSON.parse(text); // Intentar convertir a JSON
+    //     if (data.status === 'success') {
+    //         console.log("Respuesta del servidor:", data.data);
+    //         // redirigir a la página de confirmación
+    //         window.location.href = 'verificarVenta?pdf=' + data.pdfUrl;
+    //     } else {
+    //         console.log("Hubo un error en la solicitud:", data.message);
+    //     }
+    // } catch (jsonError) {
+    //     console.error("Error al analizar el JSON:", jsonError);
+    // }
+
+    // } catch (error) {
+    // console.error("Error en la solicitud:", error);
+    // }
 }
+
+// async function confirmarVenta() {
+//     try {
+//         const response = await fetch('http://localhost/proyecto_idaca/public/confirmarVenta', {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify({ confirmar: true })
+//         });
+
+//         const data = await response.json();
+        
+//         if (data.status === 'success') {
+//             alert('Venta confirmada y PDF guardado correctamente');
+//             window.location.href = '/ventas';
+//         } else {
+//             console.error("Error al confirmar la venta:", data.message);
+//         }
+//     } catch (error) {
+//         console.error("Error en la solicitud de confirmación:", error);
+//     }
+// }
 
 
 window.buscar = buscar;
 window.agregarlinea = agregarlinea;
 window.eliminarlinea = eliminarlinea; 
 window.verificarVenta = verificarVenta;
+window.enviarProductosVerificados = enviarProductosVerificados;

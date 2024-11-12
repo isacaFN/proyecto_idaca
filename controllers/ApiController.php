@@ -6,6 +6,7 @@ use Model\Usuario;
 use MVC\router;
 use Model\Cliente;
 use Model\Producto;
+use controllers\VentaController;
 
 class ApiController{
     public static function apiUsuarios(router $router){
@@ -40,8 +41,11 @@ class ApiController{
             // Procesar los datos (en este caso, solo devolver los datos recibidos)
             echo json_encode([
                 'status' => 'success',
-                'data' => 'Datos recibidos correctamente'
+                'data' => 'Datos recibidos correctamente'  
             ]);
+
+            // header('location: verificarVenta');
+            $router->render('ventas/verificarVenta');
 
         } else {
             // Si no se pudo leer el JSON, enviar un error

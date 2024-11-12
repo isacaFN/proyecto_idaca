@@ -1,0 +1,1 @@
+function mostrarPrevisualizacionPDF(){document.getElementById("modalPrevisualizacion").style.display="block"}document.addEventListener("DOMContentLoaded",(function(){mostrarPrevisualizacionPDF()}));

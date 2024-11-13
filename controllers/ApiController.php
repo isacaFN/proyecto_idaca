@@ -45,7 +45,9 @@ class ApiController{
             ]);
 
             // header('location: verificarVenta');
-            $router->render('ventas/verificarVenta');
+            $router->render('ventas/verificarVenta', [
+                
+            ]);
 
         } else {
             // Si no se pudo leer el JSON, enviar un error

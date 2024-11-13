@@ -1,9 +1,12 @@
 <script type="module" src="../public/build/js/confirmarVenta.js"></script>
 
 <h1>Verificar venta</h1>
-
-<div id="modalPrevisualizacion" style="display:none;">
-    <iframe id="iframePrevisualizacion" width="100%" height="600px" src="<?php echo $pdf; ?>"></iframe>
-    <button onclick="confirmarVenta()">Confirmar Venta</button>
-    <button onclick="document.getElementById('modalPrevisualizacion').style.display='none'">Cerrar</button>
-</div>
+<section class="contenedorIframePDF">
+    <div id="modalPrevisualizacion">
+        <iframe id="iframePrevisualizacion" src="<?php echo $pdf ?>"></iframe>
+    </div>
+    <div class="contenedor-boton">
+        <button class="boton_verde" onclick="confirmarVenta()">Confirmar Venta</button>
+        <button class="boton">Cerrar</button>
+    </div>
+</section>

@@ -1,0 +1,44 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.contenedorIframePDF{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 85%;
+    margin: 0 10rem;
+}
+
+#modalPrevisualizacion {
+    display: none;
+    height: 60%;
+    width: 90%;
+
+}
+
+#iframePrevisualizacion {
+    width: 100%;
+    height: 100%;
+}
+.contenedor-boton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.boton_verde{
+    display: inline-block;
+    height: 4rem;
+    width: 22rem;
+    font-size: 1.2rem;
+    margin : 0 1rem;
+}
+
+.boton{
+    height: 4rem;
+    width: 22rem;
+    font-size: 1.2rem;
+    margin : 0 1rem;
+}

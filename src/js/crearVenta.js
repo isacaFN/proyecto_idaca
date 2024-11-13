@@ -203,6 +203,7 @@ function agregarlinea() {
     const codproducto = document.createElement('td');
     codproductoInput.classList.add('codProducto');
     codproductoInput.name = 'codproducto';
+    codproductoInput.setAttribute('required', 'true');
     codproducto.appendChild(codproductoInput);
 
     const NombreProducto = document.createElement('td');
@@ -331,7 +332,9 @@ function eliminarlinea() {
         trVenta.remove();
     }
 
-    producto.children[0].dataset.processed = "false";
+    for (let i = 0; i < producto.children.length; i++) {
+        producto.children[i].dataset.processed = "false";
+    }
 
     // Mostrar/ocultar botón de eliminación
     if (producto.children.length == 1) {
@@ -347,6 +350,13 @@ function eliminarlinea() {
 }
 
 function verificarVenta() {
+
+    if(document.getElementById('inputNombreCliente')){
+    }else{
+        alert('Debes ingresar un cliente para poder verificar la venta');
+        return;
+    }
+
     const filas = document.querySelectorAll('.tr');
 
     // Crear un mapa auxiliar para acceder a los productos más rápido
@@ -396,12 +406,12 @@ function insertarProducto(codproducto, cantidad) {
 
 async function enviarProductosVerificados() {
 
+    const nombreCliente = document.getElementById('inputNombreCliente').value;
+
     // leemos el monto neto, el iva y total a pagar
     const montoNeto = Number(document.getElementById('montoNeto').value) ? Number(document.getElementById('montoNeto').value.replace(/\./g, '').replace(',', '.')) : Number(document.getElementById('subtotal').value.replace(/\./g, '').replace(',', '.'));
     const totalIva = Number(document.getElementById('totalIva').value.replace(/\./g, '').replace(',', '.'));
     const totalApagar = Number(document.getElementById('total').value.replace(/\./g, '').replace(',', '.'));
-
-    const nombreCliente = document.getElementById('inputNombreCliente').value;
 
     // hacemos un nuevo array solo con los productos que tengan alguna cantidad
     let productosConCantidad = arrayProductosCopia.filter(producto => ("cantidad" in producto));
@@ -417,59 +427,59 @@ async function enviarProductosVerificados() {
 
     console.log(productosConCantidad);
 
-    const productosFerificadosJSON = JSON.stringify(productosFerificados);
+    const productosFerificadosJSON = JSON.stringify(productosConCantidad);
 
-    // try {
-    // const response = await fetch('http://localhost/proyecto_idaca/public/verificarVenta', {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: productosFerificadosJSON
-    // });
-    // const text = await response.text();
+    try {
+    const response = await fetch('http://localhost/proyecto_idaca/public/verificarVenta', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: productosFerificadosJSON
+    });
+    const text = await response.text();
 
-    // // Intentar convertir a JSON si es posible
-    // try {
-    //     const data = JSON.parse(text); // Intentar convertir a JSON
-    //     if (data.status === 'success') {
-    //         console.log("Respuesta del servidor:", data.data);
-    //         // redirigir a la página de confirmación
-    //         window.location.href = 'verificarVenta?pdf=' + data.pdfUrl;
-    //     } else {
-    //         console.log("Hubo un error en la solicitud:", data.message);
-    //     }
-    // } catch (jsonError) {
-    //     console.error("Error al analizar el JSON:", jsonError);
-    // }
+    // Intentar convertir a JSON si es posible
+    try {
+        const data = JSON.parse(text); // Intentar convertir a JSON
+        if (data.status === 'success') {
+            console.log("Respuesta del servidor:", data.data);
+            // redirigir a la página de confirmación
+            window.location.href = 'verificarVenta?pdf=' + data.pdfUrl;
+        } else {
+            console.log("Hubo un error en la solicitud:", data.message);
+        }
+    } catch (jsonError) {
+        console.error("Error al analizar el JSON:", jsonError);
+    }
 
-    // } catch (error) {
-    // console.error("Error en la solicitud:", error);
-    // }
+    } catch (error) {
+    console.error("Error en la solicitud:", error);
+    }
 }
 
-// async function confirmarVenta() {
-//     try {
-//         const response = await fetch('http://localhost/proyecto_idaca/public/confirmarVenta', {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify({ confirmar: true })
-//         });
+async function confirmarVenta() {
+    try {
+        const response = await fetch('http://localhost/proyecto_idaca/public/confirmarVenta', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ confirmar: true })
+        });
 
-//         const data = await response.json();
+        const data = await response.json();
         
-//         if (data.status === 'success') {
-//             alert('Venta confirmada y PDF guardado correctamente');
-//             window.location.href = '/ventas';
-//         } else {
-//             console.error("Error al confirmar la venta:", data.message);
-//         }
-//     } catch (error) {
-//         console.error("Error en la solicitud de confirmación:", error);
-//     }
-// }
+        if (data.status === 'success') {
+            alert('Venta confirmada y PDF guardado correctamente');
+            window.location.href = '/ventas';
+        } else {
+            console.error("Error al confirmar la venta:", data.message);
+        }
+    } catch (error) {
+        console.error("Error en la solicitud de confirmación:", error);
+    }
+}
 
 
 window.buscar = buscar;

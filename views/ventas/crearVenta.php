@@ -118,8 +118,6 @@
 
     <div class="contenedor-boton">
             <button class="boton" type="button" onclick="verificarVenta()"> Verificar</button>
-            <!-- <button class="boton" type="submit" ">Generar Venta</button> -->
-
     </div>
 
 </form>

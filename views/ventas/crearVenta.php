@@ -125,9 +125,5 @@
 </form>
 
 <section class="contendor" id="modal-datos">
-
-<button onclick="verificarVenta()">Generar Previsualización</button>
-
-
 </section>
 </section>

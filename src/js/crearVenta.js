@@ -2,7 +2,7 @@ let rutCliente;
 let filas =0 ;
 let url;
 let arrayproductos = [];
-let productosFerificados = {};
+let arrayProductosCopia = [];
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -44,6 +44,8 @@ async function consultarAPI(url){
         if(url.includes('productos')){
             arrayproductos = convertir;
             autocompletar(arrayproductos);
+
+            arrayProductosCopia = arrayproductos.map(producto => ({ ...producto }));
         }
         
     } catch (error) {
@@ -132,8 +134,9 @@ function calcularSubtotalTotal() {
     
     inputsSubtotalProducto.forEach(input => {
         // Convertir el valor a número, eliminando cualquier formato de miles
-        let valor = parseFloat(input.value.replace(/\./g, '').replace(',', '.')) || 0; // Remover puntos de miles y ajustar decimales
+        let valor = Number(input.value.replace(/\./g, '').replace(',', '.')) || 0; // Remover puntos de miles y ajustar decimales
         total += valor;
+
     });
     
     const inputSubtotal = document.getElementById('subtotal');
@@ -146,20 +149,19 @@ function calcularSubtotalTotal() {
 
 function calcularMontoNeto(subtotal) {
         
-    let valor = parseFloat(subtotal.replace(/\./g, '').replace(',', '.')) || 0; // Remover puntos de miles y ajustar decimales
-
+    let valor = Number(subtotal.replace(/\./g, '').replace(',', '.')) || 0; // Remover puntos de miles y ajustar decimales
     const descuentoInput = document.getElementById('descuento');
 
     descuentoInput.addEventListener('input', function() {
-        if (parseFloat(descuentoInput.value) > 100) {
+        if (Number(descuentoInput.value) > 100) {
             alert("El descuento no puede ser mayor que 100%.");
             descuentoInput.value = 100; // Restablecer a 100 si se supera el máximo
         }else{
             const inputTotalDescuento = document.getElementById('totalDescuento');
-            inputTotalDescuento.value = new Intl.NumberFormat('es-ES').format(((parseFloat(subtotal.replace(/\./g, '').replace(',', '.')) || 0) * parseFloat(descuentoInput.value)) / 100);
+            inputTotalDescuento.value = new Intl.NumberFormat('es-ES').format(((Number(subtotal.replace(/\./g, '').replace(',', '.')) || 0) * Number(descuentoInput.value)) / 100);
 
             const inputMontoNeto = document.getElementById('montoNeto');
-            inputMontoNeto.value = new Intl.NumberFormat('es-ES').format(valor - parseFloat(inputTotalDescuento.value.replace(/\./g, '').replace(',', '.')));
+            inputMontoNeto.value = new Intl.NumberFormat('es-ES').format(valor - Number(inputTotalDescuento.value.replace(/\./g, '').replace(',', '.')));
             let montoNeto = inputMontoNeto.value;
             calcularTotal(montoNeto);
         }
@@ -175,15 +177,15 @@ function calcularTotal(montoNeto){
     const iva = 19; // 19% IVA
     const inputIva = document.getElementById('iva');
     inputIva.value = iva;
-    let valor = parseFloat(montoNeto.replace(/\./g, '').replace(',', '.')) || 0; // Remover puntos de miles y ajustar decimales
+    let valor = Number(montoNeto.replace(/\./g, '').replace(',', '.')) || 0; // Remover puntos de miles y ajustar decimales
 
     const inputtotalIva = document.getElementById('totalIva');
     let totaliva = (valor *  iva) / 100;
     inputtotalIva.value = new Intl.NumberFormat('es-ES').format(totaliva);
 
-     valor = parseFloat(inputtotalIva.value.replace(/\./g, '').replace(',', '.')) || 0;
+     valor = Number(inputtotalIva.value.replace(/\./g, '').replace(',', '.')) || 0;
 
-    let total = valor + parseFloat(montoNeto.replace(/\./g, '').replace(',', '.'));
+    let total = valor + Number(montoNeto.replace(/\./g, '').replace(',', '.'));
 
     const inputTotal = document.getElementById('total');
     inputTotal.value = new Intl.NumberFormat('es-ES').format(total);
@@ -214,7 +216,7 @@ function agregarlinea() {
     const Cantidad = document.createElement('td');
     const input2 = document.createElement('input');
     input2.classList.add('cantidadProducto');
-    input2.type = 'number';
+    input2.type = 'Number';
     input2.name = 'cantidad';
     input2.setAttribute('required', 'true');
     Cantidad.appendChild(input2);
@@ -304,6 +306,7 @@ function mostrar(dni, nombre){
     const Cliente = document.createElement('INPUT'); 
     Cliente.type = 'text';
     Cliente.classList.add('cliente');
+    Cliente.id = 'inputNombreCliente';
     Cliente.value = nombre;
 
     nombreCliente.appendChild(label);
@@ -315,37 +318,32 @@ function mostrar(dni, nombre){
 
 function eliminarlinea() {
     filas--;
+    const producto = document.getElementById('producto');
 
-    if (producto.children.length > 1) {
+    if (producto.children.length > 1) { 
         // Obtener la última fila (tr) y su código de producto y cantidad
         const trVenta = document.getElementById('producto').lastChild;
         const codigoProducto = trVenta.dataset.idproducto;
-        const cantidadProducto = parseFloat(trVenta.querySelector('.cantidadProducto').value);
+        const cantidadProducto = Number(trVenta.querySelector('.cantidadProducto').value);
 
-        // Restar la cantidad en productosFerificados si existe
-        if (productosFerificados[codigoProducto] !== undefined) {
-            productosFerificados[codigoProducto] -= cantidadProducto;
-
-            // Eliminar la clave si el valor llega a 0 o menos
-            if (productosFerificados[codigoProducto] <= 0) {
-                delete productosFerificados[codigoProducto];
-            }
-        }
+        arrayProductosCopia = arrayproductos.map(producto => ({ ...producto }));
 
         trVenta.remove();
     }
+
+    producto.children[0].dataset.processed = "false";
 
     // Mostrar/ocultar botón de eliminación
     if (producto.children.length == 1) {
         const botonEliminar = document.querySelector('.ocultar');
         botonEliminar.style.display = 'none';
+
+
     }
 
     // Llamar a las demás funciones
     autocompletar(arrayproductos, filas);
     calcularSubtotalTotal();
-
-    console.log(productosFerificados); // Verificar el estado de productosFerificados
 }
 
 function verificarVenta() {
@@ -369,7 +367,7 @@ function verificarVenta() {
         // Si el producto existe en el mapa, procedemos
         if (productoMap[datasetFilaActual]) {
             // Convertimos el valor del input a número
-            let valorInput = parseFloat(fila.querySelector('.cantidadProducto').value);
+            let valorInput = Number(fila.querySelector('.cantidadProducto').value);
 
             // Solo insertar si es un número válido
             if (!isNaN(valorInput)) {
@@ -385,19 +383,40 @@ function verificarVenta() {
 }
 
 function insertarProducto(codproducto, cantidad) {
-    if (productosFerificados[codproducto] !== undefined) {
-        // Sumar el valor existente con el nuevo valor
-        productosFerificados[codproducto] += cantidad;
-    } else {
-        // Si no existe, asignar el valor directamente
-        productosFerificados[codproducto] = cantidad;
+
+    let productoEncontrado = arrayProductosCopia.find(producto => producto.codproducto === codproducto);
+
+    if(productoEncontrado){
+            productoEncontrado.cantidad = (productoEncontrado.cantidad || 0) + Number(cantidad);
+
     }
 
 
 }
 
 async function enviarProductosVerificados() {
-    console.log(productosFerificados);
+
+    // leemos el monto neto, el iva y total a pagar
+    const montoNeto = Number(document.getElementById('montoNeto').value) ? Number(document.getElementById('montoNeto').value.replace(/\./g, '').replace(',', '.')) : Number(document.getElementById('subtotal').value.replace(/\./g, '').replace(',', '.'));
+    const totalIva = Number(document.getElementById('totalIva').value.replace(/\./g, '').replace(',', '.'));
+    const totalApagar = Number(document.getElementById('total').value.replace(/\./g, '').replace(',', '.'));
+
+    const nombreCliente = document.getElementById('inputNombreCliente').value;
+
+    // hacemos un nuevo array solo con los productos que tengan alguna cantidad
+    let productosConCantidad = arrayProductosCopia.filter(producto => ("cantidad" in producto));
+
+    // hacemos push al nuevo array de productos con cantidad: el monto neto, el iva y total a pagar
+    productosConCantidad.push({
+        "dni" : rutCliente,
+        "nombre" : nombreCliente,
+        "montoNeto" : montoNeto,
+        "totalIva" : totalIva,
+        "totalApagar" : totalApagar
+    });
+
+    console.log(productosConCantidad);
+
     const productosFerificadosJSON = JSON.stringify(productosFerificados);
 
     // try {

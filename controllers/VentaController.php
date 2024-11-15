@@ -1,14 +1,18 @@
 <?php
-
 namespace controllers;
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 use MVC\router;
 use Model\Venta;
-use Dompdf\Dompdf;
-use Dompdf\Options;
 use Model\Producto;
+use Classes\Pdf;
 
 class VentaController{
+
+    public $arregloProductos = [];
 
      public static function ventas(router $router){
 
@@ -22,7 +26,6 @@ class VentaController{
     }
     
     public static function verificarVenta(router $router) {
-        $productosCantidad = [];
 
         $productos = Producto::all();
 
@@ -34,60 +37,37 @@ class VentaController{
             $rawData = file_get_contents('php://input');
         
             if ($rawData) {
-                $productosCantidad = json_decode($rawData, true); // Decodificar JSON a un arreglo
-        
-                // Generar PDF usando Dompdf
-                $options = new Options();
-                $options->set('isRemoteEnabled', true);
-                $dompdf = new Dompdf($options);
+                $arregloProductos = json_decode($rawData, true); // Decodificar JSON a un arreglo
+                $arregloNuevo = [];
 
-                $html = '<h2>Nota de pedido</h2><table border="1"><tr><th>Código producto</th><th>Nombre</th><th>Cantidad</th><th>Precio</th><th>Subtotal</th></tr>';
-                $html .= "<tr>
-                            <td></td>
-                        </tr>";
-        
-                // Renderizar el PDF
-                $dompdf->loadHtml($html);
-                $dompdf->setPaper('A4', 'portrait'); // Establecer el tamaño de papel
-                $dompdf->render(); // Generar el PDF
-                
-                $nombreArchivo = 'venta_' . date('Y-m-d_H-i-s') . '.pdf'; // Nombre del archivo PDF
-                // Ruta para guardar el PDF en el servidor
-                $tempPdfPath = $_SERVER['DOCUMENT_ROOT'] . '/proyecto_idaca/temp/pdf/' . $nombreArchivo;
-                
-                // Verificar si el directorio existe y crearlo si no es así
-                $dir = dirname($tempPdfPath);
-                if (!is_dir($dir)) {
-                    mkdir($dir, 0777, true);  // Crear directorio si no existe
+                foreach ($arregloProductos as $objeto) {
+                    if (isset($objeto['codproducto'])) {
+                        // Agregar al nuevo arreglo solo los objetos con propiedades específicas
+                        $arregloNuevo[] = [
+                            'codproducto' => $objeto['codproducto'],
+                            'nombreProducto' => $objeto['nomprod'],
+                            'cantidad' => $objeto['cantidad'],
+                            'precio' => $objeto['precio']
+                        ];
+                    }
                 }
-        
-                // Guardar el contenido del PDF en la ruta especificada
-                file_put_contents($tempPdfPath, $dompdf->output());
-        
-                // Responder con éxito y la URL del PDF generado
-                echo json_encode([
-                    'status' => 'success',
-                    'data' => 'Datos recibidos y PDF generado',
-                    'pdfUrl' => '/proyecto_idaca/temp/pdf/' . $nombreArchivo // URL accesible desde el navegador
-                ]);
-            } else {
-                // Si no se reciben datos JSON válidos
-                echo json_encode([
-                    'status' => 'error',
-                    'message' => 'No se recibieron datos JSON válidos'
-                ]);
-            }
+                
+            $pdf = new Pdf($arregloNuevo);
+
+            $pdf->PdfVenta();
+
         }
+    }
         
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             // Renderizar la página de verificación de la venta
-
             $pdf = $_GET['pdf'];
             $router->render('ventas/verificarVenta', [
                 'pdf' => $pdf
             ]);
         }
     }
+
 
     public static function confirmarVenta(router $router) {
         header('Content-Type: application/json'); 

@@ -6,27 +6,38 @@ use Dompdf\Options;
 use Model\Producto;
 
 class Pdf{
-    public $pdf;
-    public $dni;
-    public $nombre;
-    public $montoNeto;
-    public $totalIva;
-    public $totalApagar;
+     public $arregloNuevo = [];
+    // public $subtotalProducto;
+    // public $cliente;
+    // public $nombreCliente;
 
-
-    public function __construct($pdf){
-        $this->pdf = $pdf;
+    public function __construct($arregloNuevo){
+        $this->arregloNuevo = $arregloNuevo;
+        // $this->$subtotalProducto = $subtotalProducto;
+        // $this->$cliente = $cliente;
+        // $this->$nombreCliente = $nombreCliente;
     }
 
-    public function generarPDF(){
+    public function PdfVenta(){
         $options = new Options();
         $options->set('isRemoteEnabled', true);
         $dompdf = new Dompdf($options);
 
         $html = '<h2>Nota de pedido</h2><table border="1"><tr><th>Código producto</th><th>Nombre</th><th>Cantidad</th><th>Precio</th><th>Subtotal</th></tr>';
-        $html .= "<tr>
-                            <td></td>
-                        </tr>";
+        foreach ($this->arregloNuevo as $producto) {
+
+            $subtotal = $producto['precio'] * $producto['cantidad'];
+            
+            $html .= "<tr>
+                        <td>{$producto['codproducto']}</td>
+                        <td>{$producto['nombreProducto']}</td>
+                        <td>{$producto['cantidad']} kg</td>
+                        <td>{$producto['precio']}</td>
+                        <td>{$subtotal}</td>
+                      </tr>";
+        }
+        
+        $html .= '</table>';
         
         // Renderizar el PDF
         $dompdf->loadHtml($html);

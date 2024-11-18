@@ -35,24 +35,38 @@ class VentaController{
         
             // Leer los datos JSON enviados en la solicitud
             $rawData = file_get_contents('php://input');
-        
             if ($rawData) {
-                $arregloProductos = json_decode($rawData, true); // Decodificar JSON a un arreglo
-                $arregloNuevo = [];
+                $arregloProductosOriginal = json_decode($rawData, true); // Decodificar JSON a un arreglo
 
-                foreach ($arregloProductos as $objeto) {
+                $arregloProductos = []; 
+                $arregloCliente = [];    
+                $datosEcnontrados = false;
+
+                foreach ($arregloProductosOriginal as $objeto) {
                     if (isset($objeto['codproducto'])) {
-                        // Agregar al nuevo arreglo solo los objetos con propiedades específicas
-                        $arregloNuevo[] = [
+                        // Agregar al arreglo de productos solo los objetos con propiedades específicas
+                        $arregloProductos[] = [
                             'codproducto' => $objeto['codproducto'],
                             'nombreProducto' => $objeto['nomprod'],
                             'cantidad' => $objeto['cantidad'],
                             'precio' => $objeto['precio']
                         ];
                     }
+                    
+                    if (isset($objeto['dni']) && !$datosEcnontrados) {
+                        // Si encontramos los datos del cliente, los agregamos al arreglo de cliente
+                        $datosEcnontrados = true;
+                        $arregloCliente[] = [
+                            'dni' => $objeto['dni'],
+                            'nombreCliente' => $objeto['nombre'],
+                            'montoNeto' => $objeto['montoNeto'],
+                            'totalIva' => $objeto['totalIva'],
+                            'totalApagar' => $objeto['totalApagar']
+                        ];
+                    }
                 }
                 
-            $pdf = new Pdf($arregloNuevo);
+            $pdf = new Pdf($arregloProductos, $arregloCliente );
 
             $pdf->PdfVenta();
 

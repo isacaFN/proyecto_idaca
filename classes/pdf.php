@@ -6,13 +6,15 @@ use Dompdf\Options;
 use Model\Producto;
 
 class Pdf{
-     public $arregloNuevo = [];
+     public $arregloProductos = [];
+     public $arregloCliente = [];
     // public $subtotalProducto;
     // public $cliente;
     // public $nombreCliente;
 
-    public function __construct($arregloNuevo){
-        $this->arregloNuevo = $arregloNuevo;
+    public function __construct($arregloProductos, $arregloCliente){
+        $this->arregloProductos = $arregloProductos;
+        $this->arregloCliente = $arregloCliente;
         // $this->$subtotalProducto = $subtotalProducto;
         // $this->$cliente = $cliente;
         // $this->$nombreCliente = $nombreCliente;
@@ -23,21 +25,38 @@ class Pdf{
         $options->set('isRemoteEnabled', true);
         $dompdf = new Dompdf($options);
 
-        $html = '<h2>Nota de pedido</h2><table border="1"><tr><th>Código producto</th><th>Nombre</th><th>Cantidad</th><th>Precio</th><th>Subtotal</th></tr>';
-        foreach ($this->arregloNuevo as $producto) {
 
-            $subtotal = $producto['precio'] * $producto['cantidad'];
+        $html = '<img src="http://localhost/proyecto_idaca/public/build/img/logoidaca.jpg" style="width:120px; height:90px;">';
+        $html .= '<h2>Nota de pedido</h2>';
+
+        // Cuadro con nombre y RUT del cliente
+        $html .= '<div style="border: 1px solid #000; padding: 10px; margin-bottom: 15px; width: 100%; max-width: 400px;">';
+        $html .= '<p style="margin: 0;"><strong>Nombre del Cliente:</strong> ' . $this->arregloCliente[0]['nombreCliente'] . '</p>';
+        $html .= '<p style="margin: 0;"><strong>RUT:</strong> ' . $this->arregloCliente[0]['dni'] . '</p>';
+        $html .= '</div>';
+        $html .= '<table style="border: 1px solid #000; border-collapse: collapse; width:100%; margin-bottom: 15px;">';
+        $html .= '<tr><th style="border: 1px solid #000;">Código producto</th style="border: 1px solid #000;"><th style="border: 1px solid #000;">Nombre</th style="border: 1px solid #000;"><th style="border: 1px solid #000;">Cantidad</th style="border: 1px solid #000;"><th style="border: 1px solid #000;">Precio</th style="border: 1px solid #000;"><th style="border: 1px solid #000;">Subtotal</th style="border: 1px solid #000;"></tr>';
+        foreach ($this->arregloProductos as $producto) {
+
+        $subtotal = $producto['precio'] * $producto['cantidad'];
             
-            $html .= "<tr>
-                        <td>{$producto['codproducto']}</td>
-                        <td>{$producto['nombreProducto']}</td>
-                        <td>{$producto['cantidad']} kg</td>
-                        <td>{$producto['precio']}</td>
-                        <td>{$subtotal}</td>
-                      </tr>";
+        $html .= "<tr>
+                <td style='border: 1px solid #000; text-align: right;'>{$producto['codproducto']}</td>
+                <td style='border: 1px solid #000; text-align: right;'>{$producto['nombreProducto']}</td>
+                <td style='border: 1px solid #000; text-align: right;'>" . number_format($producto['cantidad'], 0, '', '.') . " kg</td>
+                <td style='border: 1px solid #000; text-align: right;'>" . number_format($producto['precio'], 0, '', '.') . "</td>
+                <td style='border: 1px solid #000; text-align: right;'>" . number_format($subtotal, 0, '', '.') . "</td>
+            </tr>";
         }
         
         $html .= '</table>';
+        $html .= '<section style="display: flex; justify-content: flex-end; margin-bottom: 15px; width: 100%;">';
+        $html .= '<div style="border: 1px solid #000; padding: 10px; margin-bottom: 15px; width: 100%; max-width: 400px;">';
+        $html .= '<p style="margin: 0;"><strong>Monto neto:</strong> ' . number_format($this->arregloCliente[0]['montoNeto'], 0, '', '.') . '</p>';
+        $html .= '<p style="margin: 0;"><strong>Total Iva:</strong> ' . number_format($this->arregloCliente[0]['totalIva'], 0, '', '.') . '</p>';
+        $html .= '<p style="margin: 0;"><strong>Total A pagar:</strong> ' . number_format($this->arregloCliente[0]['totalApagar'], 0, '', '.') . '</p>';
+        $html .= '</div>';
+    $html .= '</section>';
         
         // Renderizar el PDF
         $dompdf->loadHtml($html);
@@ -61,7 +80,9 @@ class Pdf{
         echo json_encode([
             'status' => 'success',
             'data' => 'Datos recibidos y PDF generado',
-            'pdfUrl' => '/proyecto_idaca/temp/pdf/' . $nombreArchivo // URL accesible desde el navegador
+            'pdfUrl' => '/proyecto_idaca/temp/pdf/' . $nombreArchivo,
+            'arreglocliente' => $this->arregloProductos,
+            'arreglocliente' => $this->arregloCliente
         ]);
     }
 

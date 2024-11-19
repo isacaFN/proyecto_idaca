@@ -473,8 +473,8 @@ async function enviarProductosVerificados() {
         if (data.status === 'success') {
             console.log("Respuesta del servidor:", data.data);
             // redirigir a la página de confirmación
-            // localStorage.setItem('productos', JSON.stringify(data.arregloproductos));
-            // localStorage.setItem('cliente', JSON.stringify(data.arreglocliente));
+            localStorage.setItem('productos', JSON.stringify(data.arregloproductos));
+            localStorage.setItem('cliente', JSON.stringify(data.arreglocliente));
 
             window.location.href = 'verificarVenta?pdf=' + data.pdfurl;
 

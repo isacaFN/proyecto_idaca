@@ -6,14 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
 function mostrarPrevisualizacionPDF() {
     document.getElementById('modalPrevisualizacion').style.display = 'block';
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const pdfUrl = urlParams.get('pdf'); // Obtener la URL del PDF
-
-    if (pdfUrl) {
-        document.getElementById('iframePrevisualizacion').src = decodeURIComponent(pdfUrl);
-    } else {
-        console.error('No se encontró la URL del PDF');
-    }
 }
 
 function confirmarVenta() {

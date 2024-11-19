@@ -109,6 +109,19 @@ class ActiveRecord {
         return $resultado;
     }
 
+    public static function registrosTotales() {
+        $query = "SELECT COUNT(*) AS total FROM " . static::$tabla;
+        $resultado = self::consultarSQL($query);
+    
+        // Verificar que el resultado es un objeto y acceder a la propiedad 'total'
+        if ($resultado && isset($resultado[0]->total)) { 
+            return (int) $resultado[0]->total; // Convertir a entero para seguridad
+        }
+        
+        // Si no hay resultados, retornar 0 como fallback
+        return 0;
+    }
+
     // Busca un registro por su id
     public static function find($id) {
         $query = "SELECT * FROM " . static::$tabla  ." WHERE id = {$id}";

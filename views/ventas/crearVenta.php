@@ -66,13 +66,7 @@
 
     </div>
 
-    <div class="contenedor_pago">
-        <label for="pago" >Forma de pago:</label>
-        <select class="tipoPago" name="pago" id="pago">
-            <option value="1">Efectivo</option>
-            <option value="2">Transferencia</option>
-            <option value="3">Credito</option>
-        </select>
+    <div id="tipoventa" class="contenedor_pago">
     </div>
 
     <div class="contenedor_detallepago">

@@ -11,10 +11,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function iniciarapp(){
     productos();
+    tipoventa();
 }
 
 function productos(){
     url = 'http://localhost/proyecto_idaca/public/api/productos';
+    consultarAPI(url);
+}
+
+function tipoventa(){
+    url = 'http://localhost/proyecto_idaca/public/api/tipoventa';
     consultarAPI(url);
 }
 
@@ -39,6 +45,10 @@ async function consultarAPI(url){
 
         if(url.includes('clientes')){
             buscarCliente(convertir);
+        }
+
+        if(url.includes('tipoventa')){
+            agregartipoventa(convertir);
         }
 
         if(url.includes('productos')){
@@ -145,6 +155,24 @@ function calcularSubtotalTotal() {
     let subtotal = inputSubtotal.value;
 
     calcularMontoNeto(subtotal);
+}
+
+function agregartipoventa(tipoventa){
+
+    const divtipoventa= document.getElementById('tipoventa');
+    const selectTipoVenta = document.createElement('select');
+    selectTipoVenta.classList.add('tipoPago');
+    selectTipoVenta.name = 'pago';
+    selectTipoVenta.id = 'pago';
+    divtipoventa.appendChild(selectTipoVenta);
+
+
+    tipoventa.forEach(tipo => {
+        const tipoVenta = document.createElement('option');
+        tipoVenta.value = tipo.id;
+        tipoVenta.textContent = tipo.tipov;
+        selectTipoVenta.appendChild(tipoVenta);
+    });
 }
 
 function calcularMontoNeto(subtotal) {
@@ -407,6 +435,7 @@ function insertarProducto(codproducto, cantidad) {
 async function enviarProductosVerificados() {
 
     const nombreCliente = document.getElementById('inputNombreCliente').value;
+    const tipopago = document.getElementById('pago').value;
 
     // leemos el monto neto, el iva y total a pagar
     const montoNeto = Number(document.getElementById('montoNeto').value) ? Number(document.getElementById('montoNeto').value.replace(/\./g, '').replace(',', '.')) : Number(document.getElementById('subtotal').value.replace(/\./g, '').replace(',', '.'));
@@ -422,10 +451,9 @@ async function enviarProductosVerificados() {
         "nombre" : nombreCliente,
         "montoNeto" : montoNeto,
         "totalIva" : totalIva,
-        "totalApagar" : totalApagar
+        "totalApagar" : totalApagar,
+        "tipoPago" : tipopago
     });
-
-    console.log(productosConCantidad);
 
     const productosFerificadosJSON = JSON.stringify(productosConCantidad);
 
@@ -445,7 +473,13 @@ async function enviarProductosVerificados() {
         if (data.status === 'success') {
             console.log("Respuesta del servidor:", data.data);
             // redirigir a la página de confirmación
-            window.location.href = 'verificarVenta?pdf=' + data.pdfUrl;
+            // localStorage.setItem('productos', JSON.stringify(data.arregloproductos));
+            // localStorage.setItem('cliente', JSON.stringify(data.arreglocliente));
+
+            window.location.href = 'verificarVenta?pdf=' + data.pdfurl;
+
+        
+            
         } else {
             console.log("Hubo un error en la solicitud:", data.message);
         }
@@ -472,6 +506,7 @@ async function confirmarVenta() {
         
         if (data.status === 'success') {
             alert('Venta confirmada y PDF guardado correctamente');
+
             window.location.href = '/ventas';
         } else {
             console.error("Error al confirmar la venta:", data.message);

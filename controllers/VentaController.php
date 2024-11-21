@@ -74,14 +74,46 @@ class VentaController{
         }
     }
         
-    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-        // Obtener el parámetro 'pdf' de la URL
-        $pdf = $_GET['pdf'] ?? null;  // Si no existe, será null
-    
-        // Renderizar la página de verificación de la venta, pasando la URL del PDF
-        $router->render('ventas/verificarVenta', [
-            'pdf' => $pdf  // Pasar la URL del PDF a la vista
-        ]);
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            // Obtener el parámetro 'pdf' de la URL
+            $pdf = $_GET['pdf'] ?? null;  // Si no existe, será null
+        
+            // Renderizar la página de verificación de la venta, pasando la URL del PDF
+            $router->render('ventas/verificarVenta', [
+                'pdf' => $pdf  // Pasar la URL del PDF a la vista
+            ]);
+        }
     }
+
+    public static function guardarVenta(router $router) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $arregloProductos = [];
+            $detalleCliente = [];
+            header('Content-Type: application/json'); 
+            // Leer los datos JSON enviados en la solicitud
+            $rawData = file_get_contents('php://input');
+            if ($rawData) {
+                $arregloProductosOriginal = json_decode($rawData, true); // Decodificar JSON a un arreglo
+
+                //console.log(data.arregloproductos.productos[0].cantidad);
+                // desde el front vienen juntos los arreglo de los productos facturados y los detalles de la venta y cliente, los separamos aca!
+                $arregloProductos = $arregloProductosOriginal['productos'];
+                $detalleCliente = $arregloProductosOriginal['cliente'];
+
+                foreach ($arregloProductos as $producto) {
+                
+                }
+
+
+
+                echo json_encode([
+                    'status' => 'success',
+                    'data' => 'Datos recibidos y PDF generado',
+                    'arregloproductos' => $arregloProductos,
+                    'arreglocliente' => $detalleCliente
+                ]);
+            }
+
+        }
     }
 }

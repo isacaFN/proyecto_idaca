@@ -10,6 +10,7 @@ use Model\Venta;
 use Model\Producto;
 use Classes\Pdf;
 use Model\Detallventa;
+use Model\Detallesventa;
 
 class VentaController{
 
@@ -22,9 +23,10 @@ class VentaController{
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $numventa = $_GET['numventa'];
-            // $venta = Venta::find($numventa);
 
-            $venta = Detallventa::ventaEspecifica($numventa);
+            // Obtener la venta especificada, que viene indicada en la url obtenida arriba
+           $venta = Detallesventa::ventaEspecifica($numventa);
+
 
             if ($numventa) {
                 $router->render('ventas/detalleventa',[
@@ -129,6 +131,7 @@ class VentaController{
                 $arregloVenta['idcliente'] = $detalleCliente[0]['idcliente'];
                 $arregloVenta['tipoventa'] = $detalleCliente[0]['tipoPago'];
                 $arregloVenta['totaliva'] = $detalleCliente[0]['totalIva'];
+                $arregloVenta['montoNeto'] = $detalleCliente[0]['montoNeto'];
                 $arregloVenta['pdf'] = $pdf;
 
                 $Venta->sincronizar($arregloVenta);

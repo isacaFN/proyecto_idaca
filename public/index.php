@@ -7,6 +7,7 @@ use controllers\ClienteController;
     use controllers\UsuarioController;
     use MVC\router;
     use controllers\VentaController;
+    use controllers\InventarioController;
 
     $router = new router();
     //home
@@ -60,6 +61,9 @@ use controllers\ClienteController;
     $router->post('proyecto_idaca/public/verificarVenta', [VentaController::class, 'verificarVenta']);
     $router->get('proyecto_idaca/public/verificarVenta', [VentaController::class, 'verificarVenta']);
     $router->post('proyecto_idaca/public/guardarVenta', [VentaController::class, 'guardarVenta']);
+
+    // ruta inventario
+    $router->get('proyecto_idaca/public/inventario', [InventarioController::class, 'inventario']);
 
 
 

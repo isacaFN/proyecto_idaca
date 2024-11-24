@@ -26,3 +26,24 @@
     }
 
 }
+
+.detalleventas td{    
+    text-align: right;
+}
+.accionesventa{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.iconoDescargarPdf{
+    color : v.$rojo;
+}
+
+.detalleventa{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color : v.$verde_boton;
+}

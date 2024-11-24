@@ -34,6 +34,15 @@ class ActiveRecord {
         // Consultar la base de datos
         $resultado = self::$db->query($query);
 
+        if ($resultado->field_count === 1) {
+            $array = [];
+            while ($registro = $resultado->fetch_assoc()) {
+                $array[] = (object) $registro;
+            }
+            $resultado->free();
+            return $array;
+        }
+
         // Iterar los resultados
         $array = [];
         while($registro = $resultado->fetch_assoc()) {
@@ -87,6 +96,8 @@ class ActiveRecord {
             $this->$key = $value;
           }
         }
+
+        return $this;
     }
 
     // CRUD
@@ -110,14 +121,15 @@ class ActiveRecord {
     }
 
     public static function registrosTotales() {
-        $query = "SELECT COUNT(*) AS total FROM " . static::$tabla;
+        $query = "SELECT COUNT(*) as total FROM " . static::$tabla;
         $resultado = self::consultarSQL($query);
-    
-        // Verificar que el resultado es un objeto y acceder a la propiedad 'total'
-        if ($resultado && isset($resultado[0]->total)) { 
-            return (int) $resultado[0]->total; // Convertir a entero para seguridad
+
+
+        // Verificar que el resultado sea un arreglo y que contiene la clave 'total'
+        if ($resultado && isset($resultado[0]->total)) {
+            return (int) $resultado[0]->total;  // Convertir a entero
         }
-        
+    
         // Si no hay resultados, retornar 0 como fallback
         return 0;
     }

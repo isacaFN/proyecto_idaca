@@ -15,9 +15,11 @@
                 <tr>
                     <th>venta #</th>
                     <th>fecha</th>
-                    <th>Kilos Totales</th>
                     <th>Cliente</th>
+                    <th>Kilos Totales</th>
+                    <th>Total pagado</th>
                     <th>Tipo de venta</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody id="Ventas" >

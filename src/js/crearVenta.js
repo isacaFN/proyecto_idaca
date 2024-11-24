@@ -1,4 +1,5 @@
 let rutCliente;
+let idCliente;
 let filas =0 ;
 let url;
 let arrayproductos = [];
@@ -282,6 +283,7 @@ function buscarCliente(clientes){
     const clienteEncontrado = clientes.find(cliente => cliente.dni === rutCliente);
     if (clienteEncontrado) {
         mostrar(clienteEncontrado.dni, clienteEncontrado.nombre);
+        idCliente = clienteEncontrado.id;
     }else{
         clienteNoExiste();
     }
@@ -440,13 +442,14 @@ async function enviarProductosVerificados() {
     // leemos el monto neto, el iva y total a pagar
     const montoNeto = Number(document.getElementById('montoNeto').value) ? Number(document.getElementById('montoNeto').value.replace(/\./g, '').replace(',', '.')) : Number(document.getElementById('subtotal').value.replace(/\./g, '').replace(',', '.'));
     const totalIva = Number(document.getElementById('totalIva').value.replace(/\./g, '').replace(',', '.'));
-    const totalApagar = Number(document.getElementById('total').value.replace(/\./g, '').replace(',', '.'));
+    const totalApagar = document.getElementById('total').value.replace(/\./g, '').replace(',', '.');
 
     // hacemos un nuevo array solo con los productos que tengan alguna cantidad
     let productosConCantidad = arrayProductosCopia.filter(producto => ("cantidad" in producto));
 
     // hacemos push al nuevo array de productos con cantidad: el monto neto, el iva y total a pagar
     productosConCantidad.push({
+        "idcliente" : idCliente,
         "dni" : rutCliente,
         "nombre" : nombreCliente,
         "montoNeto" : montoNeto,
@@ -475,6 +478,7 @@ async function enviarProductosVerificados() {
             // redirigir a la página de confirmación
             localStorage.setItem('productos', JSON.stringify(data.arregloproductos));
             localStorage.setItem('cliente', JSON.stringify(data.arreglocliente));
+            localStorage.setItem('pdf', data.pdfurl);
 
             window.location.href = 'verificarVenta?pdf=' + data.pdfurl;
 
@@ -489,30 +493,6 @@ async function enviarProductosVerificados() {
 
     } catch (error) {
     console.error("Error en la solicitud:", error);
-    }
-}
-
-async function confirmarVenta() {
-    try {
-        const response = await fetch('http://localhost/proyecto_idaca/public/confirmarVenta', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ confirmar: true })
-        });
-
-        const data = await response.json();
-        
-        if (data.status === 'success') {
-            alert('Venta confirmada y PDF guardado correctamente');
-
-            window.location.href = '/ventas';
-        } else {
-            console.error("Error al confirmar la venta:", data.message);
-        }
-    } catch (error) {
-        console.error("Error en la solicitud de confirmación:", error);
     }
 }
 

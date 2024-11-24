@@ -40,10 +40,9 @@ use controllers\ClienteController;
     $router->get('proyecto_idaca/public/api/productos', [ApiController::class, 'apiProductos']);
     //api tipo de venta 
     $router->get('proyecto_idaca/public/api/tipoventa', [ApiController::class, 'apitipoventa']);
+    // api ventas
+    $router->get('proyecto_idaca/public/api/ventas', [ApiController::class, 'apiventas']);
 
-    // api productos ferificados
-    //$router->post('proyecto_idaca/public/api/productosFerificados', [ApiController::class, 'apiProductosFerificados']);
-    // $router->get('proyecto_idaca/public/api/productosFerificados', [ApiController::class, 'apiProductosFerificados']);
     
     // crear usuarios(administrador, vendedor, chofer)
     $router->get('proyecto_idaca/public/crearusuario', [UsuarioController::class, 'crearUsuario']);
@@ -56,6 +55,7 @@ use controllers\ClienteController;
 
     // rutas ventas
     $router->get('proyecto_idaca/public/ventas', [VentaController::class, 'ventas']);
+    $router->get('proyecto_idaca/public/detalleventa', [VentaController::class, 'detalleventa']);
     $router->get('proyecto_idaca/public/crearVenta', [VentaController::class, 'crearVenta']);
     $router->post('proyecto_idaca/public/verificarVenta', [VentaController::class, 'verificarVenta']);
     $router->get('proyecto_idaca/public/verificarVenta', [VentaController::class, 'verificarVenta']);

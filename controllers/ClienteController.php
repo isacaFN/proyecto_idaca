@@ -9,11 +9,7 @@ class ClienteController{
 
      public static function clientes(router $router){
 
-        $clientes = Cliente::all();
-
-        $router->render('clientes/clientes',[
-            'clientes' => $clientes
-        ]);
+        $router->render('clientes/clientes');
     }
 
     public static function crearCliente(router $router){
@@ -22,7 +18,6 @@ class ClienteController{
 
         $alertas = [];
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
-
             debugear($_POST);
             $cliente->sincronizar($_POST);
             $alertas = $cliente->validarCliente();

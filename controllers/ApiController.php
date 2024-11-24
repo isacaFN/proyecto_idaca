@@ -36,4 +36,10 @@ class ApiController{
         echo json_encode($productos);
     }
 
+    public static function apiventas(router $router){
+        $ventas = Venta::all();
+
+        echo json_encode($ventas);
+    }
+
 }

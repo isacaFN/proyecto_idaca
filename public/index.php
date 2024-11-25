@@ -64,6 +64,7 @@ use controllers\ClienteController;
 
     // ruta inventario
     $router->get('proyecto_idaca/public/inventario', [InventarioController::class, 'inventario']);
+    $router->post('proyecto_idaca/public/inventario', [InventarioController::class, 'inventario']);
 
 
 

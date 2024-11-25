@@ -176,23 +176,50 @@ class ActiveRecord {
     }
 
     // Actualizar el registro
+    // public function actualizar() {
+    //     // Sanitizar los datos
+    //     $atributos = $this->sanitizarAtributos();
+
+    //     // Iterar para ir agregando cada campo de la BD
+    //     $valores = [];
+    //     foreach($atributos as $key => $value) {
+    //         $valores[] = "{$key}='{$value}'";
+    //     }
+
+    //     // Consulta SQL
+    //     $query = "UPDATE " . static::$tabla ." SET ";
+    //     $query .=  join(', ', $valores );
+    //     $query .= " WHERE id = '" . self::$db->escape_string($this->id) . "' ";
+    //     $query .= " LIMIT 1 "; 
+
+    //     // Actualizar BD
+    //     $resultado = self::$db->query($query);
+    //     return $resultado;
+    // }
+
     public function actualizar() {
         // Sanitizar los datos
         $atributos = $this->sanitizarAtributos();
-
-        // Iterar para ir agregando cada campo de la BD
+    
+        // Remover "cantactual" de los atributos para que no sea sobrescrito
+        unset($atributos['cantactual']);
+    
+        // Construir los valores para la consulta
         $valores = [];
-        foreach($atributos as $key => $value) {
-            $valores[] = "{$key}='{$value}'";
+        foreach ($atributos as $key => $value) {
+            $valores[] = "{$key} = '{$value}'";
         }
-
-        // Consulta SQL
-        $query = "UPDATE " . static::$tabla ." SET ";
-        $query .=  join(', ', $valores );
+    
+        // Agregar la suma para "cantactual"
+        $valores[] = "cantactual = cantactual + '" . self::$db->escape_string($this->cantactual) . "'";
+    
+        // Construir la consulta SQL
+        $query = "UPDATE " . static::$tabla . " SET ";
+        $query .= join(', ', $valores);
         $query .= " WHERE id = '" . self::$db->escape_string($this->id) . "' ";
-        $query .= " LIMIT 1 "; 
-
-        // Actualizar BD
+        $query .= " LIMIT 1";
+    
+        // Ejecutar la consulta
         $resultado = self::$db->query($query);
         return $resultado;
     }

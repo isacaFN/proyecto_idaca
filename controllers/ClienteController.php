@@ -18,7 +18,6 @@ class ClienteController{
 
         $alertas = [];
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            debugear($_POST);
             $cliente->sincronizar($_POST);
             $alertas = $cliente->validarCliente();
             

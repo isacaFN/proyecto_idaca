@@ -1,0 +1,64 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.modal{
+    width: 90rem;
+    height: 50rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.modal h3{
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+.modal p{
+    text-align: center;
+    font-size: 1.4rem;
+    margin: 1rem 0;
+}
+
+.detalles_inventario{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    label{
+        margin-right: 1rem;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    select{
+        border: 1px solid v.$verde_boton;
+        height: 4rem;
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    input{
+        width: 15rem;
+        height: 4rem;
+        border: 1px solid v.$verde_boton;
+        margin-bottom: 2rem;
+
+    }
+
+}
+.formulario-inventario{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    .boton_verde{
+        width: 6rem;
+        height: 3rem;
+    }
+}

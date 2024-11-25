@@ -1,13 +1,14 @@
 <?php
     require_once '../includes/app.php';
 
-use controllers\ApiController;
-use controllers\ClienteController;
+    use controllers\ApiController;
+    use controllers\ClienteController;
     use controllers\LoginController;
     use controllers\UsuarioController;
     use MVC\router;
     use controllers\VentaController;
     use controllers\InventarioController;
+    use controllers\dashboardController;
 
     $router = new router();
     //home
@@ -44,6 +45,9 @@ use controllers\ClienteController;
     // api ventas
     $router->get('proyecto_idaca/public/api/ventas', [ApiController::class, 'apiventas']);
 
+    // api ventas totales
+    $router->get('proyecto_idaca/public/api/ventastotales', [ApiController::class, 'apiventastotales']);
+
     
     // crear usuarios(administrador, vendedor, chofer)
     $router->get('proyecto_idaca/public/crearusuario', [UsuarioController::class, 'crearUsuario']);
@@ -65,6 +69,9 @@ use controllers\ClienteController;
     // ruta inventario
     $router->get('proyecto_idaca/public/inventario', [InventarioController::class, 'inventario']);
     $router->post('proyecto_idaca/public/inventario', [InventarioController::class, 'inventario']);
+
+    // ruta dashboard    
+    $router->get('proyecto_idaca/public/dashboard', [dashboardController::class, 'dashboard']);
 
 
 

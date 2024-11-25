@@ -134,6 +134,12 @@ class ActiveRecord {
         return 0;
     }
 
+    public static function suma($columna) {
+        $query = "SELECT SUM({$columna}) FROM " . static::$tabla;
+        $resultado = self::consultarSQL($query);
+        return array_shift($resultado);
+    }
+
     // Busca un registro por su id
     public static function find($id) {
         $query = "SELECT * FROM " . static::$tabla  ." WHERE id = {$id}";
@@ -174,28 +180,6 @@ class ActiveRecord {
            'id' => self::$db->insert_id
         ];
     }
-
-    // Actualizar el registro
-    // public function actualizar() {
-    //     // Sanitizar los datos
-    //     $atributos = $this->sanitizarAtributos();
-
-    //     // Iterar para ir agregando cada campo de la BD
-    //     $valores = [];
-    //     foreach($atributos as $key => $value) {
-    //         $valores[] = "{$key}='{$value}'";
-    //     }
-
-    //     // Consulta SQL
-    //     $query = "UPDATE " . static::$tabla ." SET ";
-    //     $query .=  join(', ', $valores );
-    //     $query .= " WHERE id = '" . self::$db->escape_string($this->id) . "' ";
-    //     $query .= " LIMIT 1 "; 
-
-    //     // Actualizar BD
-    //     $resultado = self::$db->query($query);
-    //     return $resultado;
-    // }
 
     public function actualizar() {
         // Sanitizar los datos

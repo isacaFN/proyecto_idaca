@@ -1,0 +1,9 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.contenedor_chart{
+    width: 50rem;
+    height: 120rem;
+    display: flex;
+    justify-content: center;
+}

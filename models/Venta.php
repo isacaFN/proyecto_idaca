@@ -14,6 +14,7 @@ class Venta extends ActiveRecord {
     public $montoNeto;
     public $totaliva;
     public $pdf;
+    public $totalventas;
 
     public function __construct($args = []) {
         $this->numventa = $args['numventa'] ?? '';
@@ -25,6 +26,7 @@ class Venta extends ActiveRecord {
         $this->montoNeto = $args['montoNeto'] ?? '';
         $this->totaliva = $args['totaliva'] ?? '';
         $this->pdf = $args['pdf'] ?? '';
+        $this->totalventas = $args['totalventas'] ?? '';
     
     }
 

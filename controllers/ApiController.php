@@ -42,4 +42,12 @@ class ApiController{
         echo json_encode($ventas);
     }
 
+    public static function apiventastotales(router $router){
+        $totalpagar = "totalpagar";
+        $totalventa = Venta::suma($totalpagar);
+
+        echo json_encode([
+            'ventas_totales' => $totalventa->{"SUM(totalpagar)"},
+        ]);
+    }
 }

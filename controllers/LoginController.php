@@ -5,6 +5,7 @@ namespace controllers;
 use MVC\router;
 use Model\Usuario;
 use Classes\Email;
+use Model\Venta;
 
 class LoginController{
     public static function login(router $router){
@@ -85,6 +86,7 @@ class LoginController{
     }
 
     public static function home(router $router){
+
         $router->render('auth/home');
     }
 

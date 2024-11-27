@@ -111,6 +111,7 @@ class ActiveRecord {
             $resultado = $this->crear();
         }
         return $resultado;
+
     }
 
     // Todos los registros
@@ -181,27 +182,65 @@ class ActiveRecord {
         ];
     }
 
-    public function actualizar() {
+    // public function actualizar($incrementarCantactual = false) {
+    //     // Sanitizar los datos
+    //     $atributos = $this->sanitizarAtributos();
+    
+
+    //     if (!$incrementarCantactual) {
+    //         unset($atributos['cantactual']);
+    //     }
+    
+    //     // Construir los valores para la consulta
+    //     $valores = [];
+    //     foreach ($atributos as $key => $value) {
+    //         $valores[] = "{$key} = '{$value}'";
+    //     }
+    
+    //     if ($incrementarCantactual && property_exists($this, 'cantactual') && !is_null($this->cantactual)) {
+    //         $valores[] = "cantactual = cantactual + '" . self::$db->escape_string($this->cantactual) . "'";
+    //     }
+    
+    //     // Construir la consulta SQL
+    //     $query = "UPDATE " . static::$tabla . " SET ";
+    //     $query .= join(', ', $valores);
+    //     $query .= " WHERE id = '" . self::$db->escape_string($this->id) . "' ";
+    //     $query .= " LIMIT 1";
+    
+    //     // Ejecutar la consulta
+    //     $resultado = self::$db->query($query);
+    //     return $resultado;
+    // }
+
+
+    public function actualizar($incrementarCantactual = false) {
         // Sanitizar los datos
         $atributos = $this->sanitizarAtributos();
     
-        // Remover "cantactual" de los atributos para que no sea sobrescrito
-        unset($atributos['cantactual']);
+        if (!$incrementarCantactual) {
+            unset($atributos['cantactual']);
+        }
     
         // Construir los valores para la consulta
         $valores = [];
         foreach ($atributos as $key => $value) {
-            $valores[] = "{$key} = '{$value}'";
+            $valores[] = "{$key} = '" . self::$db->escape_string($value) . "'";
         }
     
-        // Agregar la suma para "cantactual"
-        $valores[] = "cantactual = cantactual + '" . self::$db->escape_string($this->cantactual) . "'";
+        // Agregar suma de cantactual si aplica
+        if (property_exists($this, 'cantactual') && !is_null($this->cantactual)) {
+            $cantactual = self::$db->escape_string($this->cantactual);
+            $valores[] = "cantactual = cantactual + {$cantactual}";
+        }
     
         // Construir la consulta SQL
         $query = "UPDATE " . static::$tabla . " SET ";
         $query .= join(', ', $valores);
         $query .= " WHERE id = '" . self::$db->escape_string($this->id) . "' ";
         $query .= " LIMIT 1";
+    
+        // Depurar la consulta SQL
+        error_log("Consulta SQL: " . $query);
     
         // Ejecutar la consulta
         $resultado = self::$db->query($query);

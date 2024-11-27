@@ -9,7 +9,7 @@ function iniciarapp(){
 }
 
 async function apiVentasTotales(){
-    fetch('http://localhost/proyecto_idaca/public/api/ventastotales')
+    fetch('http://localhost/proyecto_idaca/public/api/ventasYgastosTotales')
     .then(response => response.json())
     .then(data => {  
         let gastos = "50000";
@@ -20,7 +20,7 @@ async function apiVentasTotales(){
                 labels: ['Ventas Totales', 'gastos totales'], 
                 datasets: [{
                     label: 'Monto en pesos chilenos', 
-                    data: [data.ventas_totales, gastos ], 
+                    data: [data.ventas_totales, data.gastos_totales], 
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.7)', 
                         'rgba(255, 99, 132, 0.7)'  
@@ -59,7 +59,6 @@ async function apiVentasTotales(){
 }
 
 async function apiProductos(){
-    console.log('Cargando productos');
     fetch('http://localhost/proyecto_idaca/public/api/productoMasVendido')
     .then(response => response.json())
     .then(data => {

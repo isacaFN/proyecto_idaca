@@ -10,6 +10,8 @@ use controllers\VentaController;
 use Model\TipoVenta;
 use Model\Venta;
 use Model\Detallesventa;
+use Model\nombreGasto;
+use Model\Gastos;
 
 class ApiController{
     public static function apiUsuarios(router $router){
@@ -43,12 +45,16 @@ class ApiController{
         echo json_encode($ventas);
     }
 
-    public static function apiventastotales(router $router){
+    public static function apiventasYgastosTotales(router $router){
         $totalpagar = "totalpagar";
         $totalventa = Venta::suma($totalpagar);
 
+        $totalgasto = "monto";
+        $totalgasto = Gastos::suma($totalgasto);
+
         echo json_encode([
             'ventas_totales' => $totalventa->{"SUM(totalpagar)"},
+            'gastos_totales' => $totalgasto->{"SUM(monto)"},
         ]);
     }
 
@@ -65,5 +71,11 @@ class ApiController{
 
         
         echo json_encode($arregloNuevo);
+    }
+
+    public static function apigastos(router $router){
+        $gastos = nombreGasto::all();
+
+        echo json_encode($gastos);
     }
 }

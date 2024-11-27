@@ -7,6 +7,8 @@
     </div>
     <div class="contenedor-boton">
         <button class="boton_verde" onclick="confirmarVenta()">Confirmar Venta</button>
-        <button class="boton">Cerrar</button>
+        <a href="crearVenta">
+        <button class="boton">Volver</button>
+        </a>
     </div>
 </section>

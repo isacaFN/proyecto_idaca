@@ -9,6 +9,7 @@
     use controllers\VentaController;
     use controllers\InventarioController;
     use controllers\dashboardController;
+    use controllers\GastosController;
 
     $router = new router();
     //home
@@ -46,10 +47,13 @@
     $router->get('proyecto_idaca/public/api/ventas', [ApiController::class, 'apiventas']);
 
     // api ventas totales
-    $router->get('proyecto_idaca/public/api/ventastotales', [ApiController::class, 'apiventastotales']);
+    $router->get('proyecto_idaca/public/api/ventasYgastosTotales', [ApiController::class, 'apiventasYgastosTotales']);
 
     //api producto mas pedido
     $router->get('proyecto_idaca/public/api/productoMasVendido', [ApiController::class, 'apiproductosmaspedido']);
+
+    //api gastos
+    $router->get('proyecto_idaca/public/api/gastos', [ApiController::class, 'apigastos']);
 
     
     // crear usuarios(administrador, vendedor, chofer)
@@ -75,6 +79,10 @@
 
     // ruta dashboard    
     $router->get('proyecto_idaca/public/dashboard', [dashboardController::class, 'dashboard']);
+
+    // ruta gastos
+    $router->get('proyecto_idaca/public/gastos', [GastosController::class, 'gastos']);
+    $router->post('proyecto_idaca/public/gastos', [GastosController::class, 'gastos']);
 
 
 

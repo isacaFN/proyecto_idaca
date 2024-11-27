@@ -1,9 +1,16 @@
 @use 'base/variables' as v;
 @use 'base/mixins' as m;
 
+.seccion_charts{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
 .contenedor_chart{
-    width: 50rem;
-    height: 120rem;
+    width: 60rem;
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }

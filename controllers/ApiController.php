@@ -9,6 +9,7 @@ use Model\Producto;
 use controllers\VentaController;
 use Model\TipoVenta;
 use Model\Venta;
+use Model\Detallesventa;
 
 class ApiController{
     public static function apiUsuarios(router $router){
@@ -49,5 +50,20 @@ class ApiController{
         echo json_encode([
             'ventas_totales' => $totalventa->{"SUM(totalpagar)"},
         ]);
+    }
+
+    public static function apiproductosmaspedido(router $router){
+        $productos = Detallesventa::productoMasPedido();
+
+        // Crear un arreglo nuevo con los datos necesarios
+        $arregloNuevo = array_map(function ($item) {
+            return (object)[
+                "nomprod" => $item->nomprod,
+                "cantidad_vendida" => $item->cantidad_vendida
+            ];
+        }, $productos);
+
+        
+        echo json_encode($arregloNuevo);
     }
 }

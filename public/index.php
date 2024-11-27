@@ -48,6 +48,9 @@
     // api ventas totales
     $router->get('proyecto_idaca/public/api/ventastotales', [ApiController::class, 'apiventastotales']);
 
+    //api producto mas pedido
+    $router->get('proyecto_idaca/public/api/productoMasVendido', [ApiController::class, 'apiproductosmaspedido']);
+
     
     // crear usuarios(administrador, vendedor, chofer)
     $router->get('proyecto_idaca/public/crearusuario', [UsuarioController::class, 'crearUsuario']);

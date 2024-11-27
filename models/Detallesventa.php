@@ -19,6 +19,7 @@ class Detallesventa extends ActiveRecord {
     public $totalpagar;
     public $tipoventa;
     public $pdf;
+    public $cantidad_vendida;
 
     public function __construct($args = []) {
         $this->idcliente = $args['idcliente'] ?? ''; // v.idcliente,
@@ -35,6 +36,8 @@ class Detallesventa extends ActiveRecord {
         $this->totalpagar = $args['totalpagar'] ?? ''; // listo
         $this->tipoventa = $args['tipoventa'] ?? ''; // v.tipoventa, 
         $this->pdf = $args['pdf'] ?? ''; // v.tipoventa, 
+        $this->cantidad_vendida = $args['cantidad_vendida'] ?? ''; // SUM(d.cantidad) AS cantidad_vendida
+
 
     
     }
@@ -72,6 +75,26 @@ class Detallesventa extends ActiveRecord {
 
         $resultado = self::consultarSQL($query);
         return $resultado;
+    }
+
+    public static function productoMasPedido(){
+        $query = "SELECT 
+            p.nomprod,
+            SUM(d.cantidad) AS cantidad_vendida
+        FROM 
+            ". self::$tabla ." d
+        INNER JOIN 
+            producto p 
+        ON 
+            d.codproducto = p.codproducto
+        GROUP BY 
+            p.nomprod
+        ORDER BY 
+            cantidad_vendida DESC;";
+
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+
     }
 
 }

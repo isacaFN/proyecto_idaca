@@ -72,7 +72,7 @@ async function apiProductos(){
             data: {
                 labels: nombres, 
                 datasets: [{
-                    label: 'Cantidad Vendida',
+                    label: 'Cantidad Vendida (KG)',
                     data: cantidades, // Cantidad vendida
                     backgroundColor: nombres.map(() => 'rgba(75, 192, 192, 0.7)'), 
                     borderColor: nombres.map(() => 'rgba(75, 192, 192, 1)'), 
@@ -88,7 +88,7 @@ async function apiProductos(){
                 scales: {
                     y: {
                         beginAtZero: true,
-                        title: { display: true, text: 'Cantidad Vendida' }
+                        title: { display: true, text: 'Cantidad Vendida (KG)' }
                     }
                 }
             }
